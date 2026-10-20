@@ -1,0 +1,354 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SWE Cohort Hub</title>
+<style>
+:root{color-scheme:light dark;--color-bg:#f6f7f4;--color-panel:#ffffff;--color-fg:#17201b;--color-fg-muted:#5b665f;--color-border-line:#d9ded8;--color-bad:#c2305a;--cds-gap-xs:.25rem;--cds-gap-sm:.5rem;--cds-gap-md:1rem;--cds-gap-lg:1.5rem;--cds-pad-sm:.5rem;--cds-pad-lg:1.25rem;--cds-radius:12px;--cds-font-size-heading:1.1rem;--cds-font-size-caption:.82rem;--cds-font-weight-medium:600;--cds-chart-muted:#dfe5e0;--cds-chart-status-critical:#c2305a;--cds-dur-slow:.3s;--font-anthropic-sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;--font-anthropic-serif:Georgia,"Times New Roman",serif}
+@media (prefers-color-scheme:dark){:root{--color-bg:#101512;--color-panel:#18201b;--color-fg:#eaf0ec;--color-fg-muted:#9aa8a0;--color-border-line:#2c3830;--cds-chart-muted:#26332b}}
+html,body{margin:0}body{background:var(--color-bg);color:var(--color-fg);padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) 32px max(16px,env(safe-area-inset-left))}
+@media (max-width:640px){.ch-classes thead{display:none}.ch-classes,.ch-classes tbody,.ch-classes tr,.ch-classes td{display:block;width:100%}.ch-classes tr{border-top:1px solid var(--color-border-line);padding:.5rem 0}.ch-classes td{border:0!important;padding:.15rem .25rem;background:none!important;white-space:normal!important}.ch-classes td:nth-child(2){font-weight:600}.ch-classes td:last-child{padding-top:.5rem}.ch-title{font-size:1.9rem}}
+</style></head><body>
+<style>
+  .ch { max-width: 72rem; margin-inline: auto; display: grid; gap: var(--cds-gap-lg); font-family: var(--font-anthropic-sans); color: var(--color-fg); }
+  .ch * { box-sizing: border-box; }
+  .ch-head { display: grid; gap: var(--cds-gap-xs); }
+  .ch-title { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: 2.25rem; line-height: 1.1; margin: 0; }
+  .ch-take { margin: 0; font-size: var(--cds-font-size-heading); color: var(--color-fg-muted); min-height: 1.5em; }
+  .ch-card { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-md); min-width: 0; align-content: start; }
+  .ch-card h2 { margin: 0; font-size: var(--cds-font-size-heading); font-weight: var(--cds-font-weight-medium); }
+  .ch-note { margin: 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  .ch-tiles { display: grid; gap: var(--cds-gap-md); grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); min-height: 9rem; }
+  .ch-tile { background: var(--color-panel); border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); padding: var(--cds-pad-lg); display: grid; gap: var(--cds-gap-xs); align-content: start; min-width: 0; }
+  .ch-tile.is-soon { border-color: var(--cds-chart-status-critical); }
+  .ch-rel { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); text-transform: uppercase; letter-spacing: .06em; }
+  .ch-big { font-family: var(--font-anthropic-serif); font-weight: 400; font-size: 2.5rem; line-height: 1; font-variant-numeric: tabular-nums; }
+  .ch-what { font-weight: var(--cds-font-weight-medium); }
+  .ch-weeks { display: flex; flex-wrap: wrap; gap: .5rem; min-height: 4.5rem; }
+  .ch-week { flex: 1 1 3rem; display: grid; gap: .25rem; justify-items: center; min-width: 2.75rem; }
+  .ch-chip { width: 100%; height: 2.5rem; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-variant-numeric: tabular-nums; border: 1px solid var(--color-border-line); }
+  .ch-week.is-done .ch-chip { background: var(--cds-chart-muted); border-color: transparent; color: var(--color-fg); }
+  .ch-week.is-now .ch-chip { font-weight: var(--cds-font-weight-medium); border: 2px solid var(--color-fg); }
+  .ch-week-tag { font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); min-height: 1.2em; text-align: center; }
+  .ch-scroll { overflow-x: auto; }
+  .ch-table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+  .ch-table th { text-align: left; font-weight: var(--cds-font-weight-medium); font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); padding: .375rem .625rem; white-space: nowrap; }
+  .ch-table td { padding: .625rem; border-top: 1px solid var(--color-border-line); vertical-align: top; }
+  .ch-table td:first-child { white-space: nowrap; }
+  .ch-pill { display: inline-block; margin-left: .5rem; padding: 0 .5rem; border-radius: 999px; border: 1px solid var(--color-fg); font-size: var(--cds-font-size-caption); }
+  .ch-act { display: inline-block; margin-right: .5rem; padding: .25rem .75rem; border-radius: 999px; border: 1px solid var(--color-fg); color: var(--color-fg); text-decoration: none; white-space: nowrap; }
+  .ch-act.is-main { background: var(--color-fg); color: var(--color-bg); }
+  .ch-act:hover { opacity: .8; }
+  .ch-act:focus-visible, .ch-link:focus-visible, .ch-copy:focus-visible { outline: 2px solid var(--color-fg); outline-offset: 2px; }
+  .ch-list { margin: 0; padding: 0; list-style: none; display: grid; gap: var(--cds-gap-sm); grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); min-height: 6rem; }
+  .ch-list li { border-top: 1px solid var(--color-border-line); padding-top: var(--cds-pad-sm); display: grid; gap: .125rem; align-content: start; }
+  .ch-list strong { font-weight: var(--cds-font-weight-medium); }
+  .ch-list span { color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  .ch-links { display: grid; gap: var(--cds-gap-lg); grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); min-height: 8rem; }
+  .ch-group { display: grid; gap: var(--cds-gap-sm); align-content: start; min-width: 0; }
+  .ch-group h3 { margin: 0; font-size: var(--cds-font-size-caption); color: var(--color-fg-muted); text-transform: uppercase; letter-spacing: .06em; font-weight: var(--cds-font-weight-medium); }
+  .ch-link, .ch-text { display: grid; gap: .125rem; padding: .625rem .75rem; border: 1px solid var(--color-border-line); border-radius: var(--cds-radius); color: inherit; text-decoration: none; min-width: 0; overflow-wrap: anywhere; }
+  .ch-link:hover { background: var(--color-bg); }
+  .ch-link small, .ch-text small { color: var(--color-fg-muted); }
+  .ch-val { font-variant-numeric: tabular-nums; user-select: all; font-weight: var(--cds-font-weight-medium); }
+  .ch-copy { justify-self: start; margin-top: .25rem; padding: .125rem .625rem; border-radius: 999px; border: 1px solid var(--color-border-line); background: transparent; color: var(--color-fg); cursor: pointer; font: inherit; font-size: var(--cds-font-size-caption); }
+  .ch-fail { display: flex; align-items: center; gap: .375rem; margin: 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); min-height: 3rem; }
+  .ch-fail::before { content: ""; width: .375rem; height: .375rem; border-radius: 50%; background: var(--color-bad); }
+  .ch-foot { margin: 0; color: var(--color-fg-muted); font-size: var(--cds-font-size-caption); }
+  [data-dash-source-state=refreshing] { opacity: .5; transition: opacity var(--cds-dur-slow); }
+
+  /* Colour layer */
+  .ch { --c-green:#0f7a4d; --c-green-bg:#e3f4ec; --c-amber:#b45309; --c-amber-bg:#fdf0d9; --c-blue:#2457c5; --c-blue-bg:#e5edfc; --c-rose:#c2305a; --c-rose-bg:#fce6ed; --c-violet:#6d3fc0; --c-violet-bg:#efe8fb; --c-on:#fff; }
+  @media (prefers-color-scheme: dark) { .ch { --c-green:#4ed39a; --c-green-bg:#12392a; --c-amber:#f4b860; --c-amber-bg:#3d2c10; --c-blue:#8fb2ff; --c-blue-bg:#16264a; --c-rose:#ff8fae; --c-rose-bg:#45172a; --c-violet:#c3a6ff; --c-violet-bg:#2a1d4d; --c-on:#0b1f17; } }
+  :root[data-theme="dark"] .ch { --c-green:#4ed39a; --c-green-bg:#12392a; --c-amber:#f4b860; --c-amber-bg:#3d2c10; --c-blue:#8fb2ff; --c-blue-bg:#16264a; --c-rose:#ff8fae; --c-rose-bg:#45172a; --c-violet:#c3a6ff; --c-violet-bg:#2a1d4d; --c-on:#0b1f17; }
+  .ch-title { color: var(--c-green); }
+  .ch-head { border-left: 6px solid var(--c-green); padding-left: 1rem; }
+  .ch-card { border-top: 4px solid var(--c-blue); }
+  #semester { border-top-color: var(--c-green); }
+  #classes { border-top-color: var(--c-blue); }
+  #exams { border-top-color: var(--c-rose); }
+  #checklist { border-top-color: var(--c-amber); }
+  #links { border-top-color: var(--c-violet); }
+  #semester h2 { color: var(--c-green); }
+  #classes h2 { color: var(--c-blue); }
+  #exams h2 { color: var(--c-rose); }
+  #checklist h2 { color: var(--c-amber); }
+  #links h2 { color: var(--c-violet); }
+  .ch-tile { border-top: 4px solid var(--c-green); background: var(--c-green-bg); }
+  .ch-tile:nth-child(2) { border-top-color: var(--c-amber); background: var(--c-amber-bg); }
+  .ch-tile:nth-child(3) { border-top-color: var(--c-rose); background: var(--c-rose-bg); }
+  .ch-tile:nth-child(1) .ch-big { color: var(--c-green); }
+  .ch-tile:nth-child(2) .ch-big { color: var(--c-amber); }
+  .ch-tile:nth-child(3) .ch-big { color: var(--c-rose); }
+  .ch-tile.is-soon { border-color: var(--c-rose); border-top-color: var(--c-rose); }
+  .ch-week.is-done .ch-chip { background: var(--c-green-bg); color: var(--c-green); border-color: var(--c-green); }
+  .ch-week.is-now .ch-chip { background: var(--c-green); color: var(--c-on); border: 2px solid var(--c-green); }
+  .ch-week:not(.is-done):not(.is-now) .ch-chip { background: var(--c-blue-bg); border-color: transparent; }
+  .ch-week-tag { color: var(--c-amber); font-weight: 600; }
+  .ch-table th { color: var(--c-on); background: var(--c-blue); }
+  .ch-exams th { background: var(--c-rose); }
+  .ch-table th:first-child { border-radius: 8px 0 0 8px; }
+  .ch-table th:last-child { border-radius: 0 8px 8px 0; }
+  .ch-table tbody tr:nth-child(even) td { background: var(--c-blue-bg); }
+  .ch-exams tbody tr:nth-child(even) td { background: var(--c-rose-bg); }
+  .ch-pill { background: var(--c-amber-bg); color: var(--c-amber); border-color: var(--c-amber); font-weight: 600; }
+  .ch-act { border-color: var(--c-blue); color: var(--c-blue); }
+  .ch-act.is-main { background: var(--c-green); border-color: var(--c-green); color: var(--c-on); }
+  .ch-tile .ch-act { border-color: var(--c-green); color: var(--c-green); }
+  .ch-list li { border-top: 0; border-left: 4px solid var(--c-amber); background: var(--c-amber-bg); padding: .625rem .75rem; border-radius: 0 8px 8px 0; }
+  .ch-list li:nth-child(even) { border-left-color: var(--c-green); background: var(--c-green-bg); }
+  .ch-group h3 { color: var(--c-violet); }
+  .ch-group:nth-child(2) h3 { color: var(--c-rose); }
+  .ch-group:nth-child(3) h3 { color: var(--c-green); }
+  .ch-link, .ch-text { border-left: 4px solid var(--c-violet); }
+  .ch-group:nth-child(2) .ch-link, .ch-group:nth-child(2) .ch-text { border-left-color: var(--c-rose); }
+  .ch-group:nth-child(3) .ch-link, .ch-group:nth-child(3) .ch-text { border-left-color: var(--c-green); }
+  .ch-link:hover { background: var(--c-violet-bg); }
+  .ch-copy { border-color: var(--c-rose); color: var(--c-rose); }
+</style>
+
+<div class="ch" id="ch">
+  <header class="ch-head" id="top">
+    <h1 class="ch-title">SWE Cohort Hub</h1>
+    <p class="ch-take" data-source="semester key_dates"></p>
+  </header>
+
+  <section id="deadlines" aria-label="Coming up">
+    <div class="ch-tiles dash-skeleton" data-source="key_dates"></div>
+  </section>
+
+  <section class="ch-card" id="semester">
+    <h2>Semester progress</h2>
+    <div class="ch-weeks dash-skeleton" data-source="semester"></div>
+    <p class="ch-note ch-weeks-note"></p>
+  </section>
+
+  <section class="ch-card" id="classes">
+    <h2>Live classes</h2>
+    <p class="ch-note">All times are Lagos time. Tap Join at class time, using your school email.</p>
+    <div class="ch-scroll">
+      <table class="ch-table ch-classes" data-source="classes" data-row-key="id" hidden>
+        <thead><tr>
+          <th data-field="date">When</th>
+          <th data-field="course">Course</th>
+          <th data-field="title">Class</th>
+          <th data-field="start">Time</th>
+          <th data-field="meet">Open</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+    <p class="ch-note ch-classes-empty" hidden>No more live classes are listed yet. Check the Discord for new ones.</p>
+  </section>
+
+  <section class="ch-card" id="exams">
+    <h2>Exam timetable</h2>
+    <p class="ch-note">Computing programme, first semester. Arrive early and bring your QR code slip.</p>
+    <div class="ch-scroll">
+      <table class="ch-table ch-exams" data-source="exams" data-row-key="id">
+        <thead><tr>
+          <th data-field="date">Date</th>
+          <th data-field="start">Time</th>
+          <th data-field="course">Course</th>
+          <th data-field="title">Paper</th>
+        </tr></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="ch-card" id="checklist">
+    <h2>Before exam day</h2>
+    <ul class="ch-list dash-skeleton" data-source="checklist"></ul>
+  </section>
+
+  <section class="ch-card" id="links">
+    <h2>Links and help</h2>
+    <div class="ch-links dash-skeleton" data-source="resources"></div>
+  </section>
+
+  <p class="ch-foot">Your class rep keeps this page up to date. Something missing or wrong? Say so in the cohort Discord.</p>
+</div>
+
+<script>
+const __D={"classes": [{"id": "cos101-1021", "date": "2026-10-21", "start": "16:00", "end": "17:30", "course": "COS 101", "title": "Introduction to Computing Sciences", "meet": "https://meet.google.com/eas-btvg-hag", "lms": "https://lms.miva.university/course/view.php?id=359"}, {"id": "mth101-1026", "date": "2026-10-26", "start": "16:00", "end": "17:00", "course": "MTH 101", "title": "Elementary Mathematics I", "meet": "https://meet.google.com/sqm-ecwd-jhx", "lms": "https://lms.miva.university/course/view.php?id=361"}, {"id": "sta111-1027", "date": "2026-10-27", "start": "15:00", "end": "16:00", "course": "STA 111", "title": "Descriptive Statistics", "meet": "https://meet.google.com/dxe-xqpf-pna", "lms": "https://lms.miva.university/course/view.php?id=360"}, {"id": "phy101-1028", "date": "2026-10-28", "start": "15:00", "end": "16:00", "course": "PHY 101", "title": "General Physics I", "meet": "https://meet.google.com/aik-ortc-pxq?authuser=0", "lms": "https://lms.miva.university/course/view.php?id=115"}], "exams": [{"id": "cos101", "date": "2026-12-05", "start": "09:00", "end": "11:00", "course": "COS 101", "title": "Introduction to Computing Sciences"}, {"id": "gst111", "date": "2026-12-05", "start": "13:00", "end": "15:00", "course": "GST 111", "title": "Communication in English"}, {"id": "mth101", "date": "2026-12-08", "start": "09:00", "end": "11:00", "course": "MTH 101", "title": "Elementary Mathematics I"}, {"id": "gst125127", "date": "2026-12-08", "start": "13:00", "end": "15:00", "course": "GST 125 / 127", "title": "Contemporary Health Issues or Environment and Sustainability (your registered elective)"}, {"id": "phy101", "date": "2026-12-10", "start": "09:00", "end": "11:00", "course": "PHY 101", "title": "General Physics I"}, {"id": "sta111", "date": "2026-12-11", "start": "09:00", "end": "11:00", "course": "STA 111", "title": "Descriptive Statistics"}, {"id": "gst121", "date": "2026-12-11", "start": "13:00", "end": "15:00", "course": "GST 121", "title": "Use of Library, Study Skills and ICT"}, {"id": "phy107", "date": "2026-12-12", "start": "09:00", "end": "11:00", "course": "PHY 107", "title": "General Practical Physics I"}], "key_dates": [{"id": "assess", "date": "2026-11-15", "label": "Mid and end-of-semester assessments close", "note": "Both must be submitted on the LMS to be allowed to write exams.", "url": "https://lms.miva.university/", "link_label": "Open the LMS"}, {"id": "centre", "date": "2026-11-18", "label": "Choose your CBT centre", "note": "Seats at Miva centres are limited, so pick early.", "url": "", "link_label": ""}, {"id": "exams", "date": "2026-12-05", "label": "Exams begin", "note": "COS 101 and GST 111 are first. Print your exam QR code slip.", "url": "", "link_label": ""}], "semester": [{"key": "current_week", "value": 7, "note": "Told by the class rep on 20 Oct 2026"}, {"key": "mid_assessment_week", "value": 4, "note": "Mid-semester assessment comes after this week"}, {"key": "end_assessment_week", "value": 9, "note": "End-of-semester assessment comes after this week"}, {"key": "as_of", "value": "2026-10-20", "note": "Date the current week was confirmed"}], "checklist": [{"id": "eligible", "item": "Stay eligible", "detail": "You need at least 75% online participation and both assessments submitted on the LMS."}, {"id": "centre", "item": "Choose your CBT centre", "detail": "Before Wednesday, 18 November 2026. Seats at Miva centres are limited."}, {"id": "qr", "item": "Print your exam QR code slip", "detail": "It is scanned at the CBT centre and required to enter the exam hall."}, {"id": "ids", "item": "Bring two IDs", "detail": "Your Miva student ID card with passport photo, plus a government photo ID: international passport, driver's licence, voter's card or NIN slip."}, {"id": "early", "item": "Arrive early", "detail": "Be at the venue 30 minutes before your paper. If you arrive 20 minutes after it starts, you will not be admitted."}, {"id": "devices", "item": "Leave devices outside", "detail": "No phones, smartwatches, laptops, notes or programmable calculators. A scientific calculator is allowed."}, {"id": "ai", "item": "No AI tools in the exam", "detail": "Using an AI tool carries a suspension of at least two academic semesters."}], "resources": [{"id": "lms", "group": "Learn", "label": "LMS (lectures and assessments)", "url": "https://lms.miva.university/", "value": "", "note": "Sign in with your school email"}, {"id": "sis", "group": "Learn", "label": "Student portal (SIS)", "url": "http://sis.miva.university/", "value": "", "note": "Your CGPA and registration"}, {"id": "live", "group": "Learn", "label": "Live lesson timetable, all courses", "url": "https://docs.google.com/spreadsheets/u/0/d/1OA2RBtFSpObA11Tky6-72t2SX-aETguE1rj1GMuMhz0/htmlview?pli=1&sle=true&pru=AAABoK_HXGY*RgM-dz9Y8HkPcOwoPneMgw", "value": "", "note": "Master sheet with every class link"}, {"id": "levels", "group": "Learn", "label": "100 to 400 level timetable", "url": "https://docs.google.com/spreadsheets/d/1GYtrs8diZ76xr9d74oWHGdDMUySbc2cpyw_fgkUG89s/edit?gid=1383398195#gid=1383398195", "value": "", "note": "Google Sheet"}, {"id": "calendar", "group": "Learn", "label": "Miva university calendar", "url": "https://miva.vercel.app", "value": "", "note": ""}, {"id": "ticket", "group": "Get help", "label": "Raise a ticket", "url": "https://support.miva.university/portal/en/signin", "value": "", "note": "Support portal"}, {"id": "advisor", "group": "Get help", "label": "Book a Success Advisor", "url": "http://bookings.miva.university/", "value": "", "note": "Choose your advisor before the time slot"}, {"id": "email", "group": "Get help", "label": "Email your complaint", "url": "", "value": "success@miva.university", "note": ""}, {"id": "admissions", "group": "Get help", "label": "Admissions office (call)", "url": "", "value": "02013300667", "note": ""}, {"id": "whatsapp", "group": "Get help", "label": "Miva Help Centre (WhatsApp)", "url": "", "value": "+234 816 8397 949", "note": ""}, {"id": "whatsapp-group", "group": "Cohort", "label": "Crashout group", "url": "https://chat.whatsapp.com/LDvpg5Aieli2byEzgouFNs", "value": "", "note": "Feeling overwhelmed? Come here to chat, ask questions and crash out together"}, {"id": "discord", "group": "Cohort", "label": "Cohort Discord server", "url": "https://discord.gg/DBFhtTFB", "value": "", "note": "Announcements and questions"}, {"id": "league", "group": "Cohort", "label": "Miva Study League", "url": "https://mivastudyleague.org", "value": "", "note": ""}]};
+const dash={data:(id)=>({status:"ok",data:__D[id]}),onData:(f)=>f()};
+const d3={timeFormat:(f)=>{const D=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],M=["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];return f.startsWith("%a")?(d)=>D[d.getDay()]+", "+M[d.getMonth()]+" "+d.getDate():(d)=>M[d.getMonth()]+" "+d.getDate();}};
+</script>
+<script>
+(function () {
+  const $ = (s) => document.querySelector(s);
+  const fmtDay = d3.timeFormat('%a, %b %-d');
+  const fmtShort = d3.timeFormat('%b %-d');
+  const parse = (s) => { const [y, m, d] = String(s).split('-').map(Number); return new Date(y, m - 1, d); };
+  const t12 = (s) => {
+    const [h, m] = String(s).split(':').map(Number);
+    return ((h + 11) % 12 + 1) + ':' + String(m).padStart(2, '0') + ' ' + (h >= 12 ? 'PM' : 'AM');
+  };
+  const dayStart = () => { const n = new Date(); return new Date(n.getFullYear(), n.getMonth(), n.getDate()); };
+  const daysTo = (d) => Math.round((d - dayStart()) / 864e5);
+  const rel = (d) => { const n = daysTo(d); return n < 0 ? 'Past' : n === 0 ? 'Today' : n === 1 ? 'Tomorrow' : 'In ' + n + ' days'; };
+
+  const mk = (tag, cls, text) => {
+    const e = document.createElement(tag);
+    if (cls) e.className = cls;
+    if (text != null) e.textContent = text;
+    return e;
+  };
+  const anchor = (cls, href, text) => {
+    const a = mk('a', cls, text);
+    a.href = href; a.target = '_blank'; a.rel = 'noopener noreferrer';
+    return a;
+  };
+  // Returns the rows once loaded; otherwise leaves the skeleton or a failed line.
+  const load = (id, box) => {
+    const d = dash.data(id);
+    const table = box.querySelector('table');
+    if (d.status === 'ok') {
+      box.classList.remove('dash-skeleton');
+      box.querySelectorAll(':scope > .ch-fail').forEach((e) => e.remove());
+      if (table && table.classList.contains('ch-exams')) table.hidden = false;
+      return d.data;
+    }
+    if (d.status === 'loading') { box.classList.add('dash-skeleton'); return null; }
+    box.classList.remove('dash-skeleton');
+    if (table) {
+      table.hidden = true;
+      if (!box.querySelector(':scope > .ch-fail')) box.append(mk('p', 'ch-fail', 'Failed to load'));
+    } else {
+      box.replaceChildren(mk('p', 'ch-fail', 'Failed to load'));
+    }
+    return null;
+  };
+  const val = (sem, key) => (sem.find((r) => r.key === key) || {}).value;
+  // Week number rolls forward by itself: weeks start on Monday, counted from the confirmed week.
+  const monday = (d) => { const x = new Date(d.getFullYear(), d.getMonth(), d.getDate()); x.setDate(x.getDate() - ((x.getDay() + 6) % 7)); return x; };
+  const curWeek = (sem) => {
+    const base = Number(val(sem, 'current_week')), end = Number(val(sem, 'end_assessment_week'));
+    const passed = Math.round((monday(dayStart()) - monday(parse(val(sem, 'as_of')))) / (7 * 864e5));
+    return Math.max(1, Math.min(base + passed, end + 1));
+  };
+
+  function renderTake() {
+    const el = $('.ch-take');
+    const sem = dash.data('semester'), keys = dash.data('key_dates');
+    if (sem.status !== 'ok' || keys.status !== 'ok') { el.textContent = ''; return; }
+    const cw = curWeek(sem.data), ew = Number(val(sem.data, 'end_assessment_week'));
+    let s = (cw > ew ? 'Semester teaching weeks are over.' : 'Week ' + cw + ' of the semester.');
+    const next = keys.data.map((r) => ({ ...r, d: parse(r.date) })).filter((r) => daysTo(r.d) >= 0).sort((a, b) => a.d - b.d)[0];
+    if (next) s += ' Next: ' + next.label + ' on ' + fmtShort(next.d) + ', ' + rel(next.d).toLowerCase() + '.';
+    el.textContent = s;
+  }
+
+  function renderTiles() {
+    const box = $('.ch-tiles');
+    const rows = load('key_dates', box);
+    if (!rows) return;
+    const items = rows.map((r) => ({ ...r, d: parse(r.date) })).filter((r) => daysTo(r.d) >= 0).sort((a, b) => a.d - b.d);
+    box.replaceChildren(...items.map((r) => {
+      const t = mk('div', 'ch-tile' + (daysTo(r.d) <= 7 ? ' is-soon' : ''));
+      t.append(mk('div', 'ch-rel', rel(r.d)), mk('div', 'ch-big', fmtShort(r.d)), mk('div', 'ch-what', r.label), mk('p', 'ch-note', r.note));
+      if (r.url) t.append(anchor('ch-act', r.url, r.link_label || 'Open'));
+      return t;
+    }));
+  }
+
+  function renderWeeks() {
+    const box = $('.ch-weeks');
+    const sem = load('semester', box);
+    if (!sem) return;
+    const cur = curWeek(sem), mid = Number(val(sem, 'mid_assessment_week')), end = Number(val(sem, 'end_assessment_week'));
+    const out = [];
+    for (let w = 1; w <= end; w++) {
+      const cell = mk('div', 'ch-week' + (w < cur ? ' is-done' : w === cur ? ' is-now' : ''));
+      cell.append(mk('div', 'ch-chip', String(w)), mk('div', 'ch-week-tag', w === cur ? 'This week' : (w === mid || w === end) ? 'Assessment' : ''));
+      out.push(cell);
+    }
+    box.replaceChildren(...out);
+    $('.ch-weeks-note').textContent = 'Assessments open after weeks ' + mid + ' and ' + end + '. The week number updates itself every Monday.';
+  }
+
+  function renderClasses() {
+    const table = $('.ch-classes'), empty = $('.ch-classes-empty');
+    const rows = load('classes', table.parentElement);
+    if (!rows) return;
+    const items = rows.map((r) => ({ ...r, d: parse(r.date) })).filter((r) => daysTo(r.d) >= 0)
+      .sort((a, b) => (a.date + a.start).localeCompare(b.date + b.start));
+    table.hidden = items.length === 0;
+    empty.hidden = items.length !== 0;
+    table.tBodies[0].replaceChildren(...items.map((r) => {
+      const tr = mk('tr');
+      tr.dataset.key = r.id;
+      const when = mk('td', null, fmtDay(r.d));
+      if (daysTo(r.d) <= 1) when.append(mk('span', 'ch-pill', rel(r.d)));
+      const open = mk('td');
+      open.append(anchor('ch-act is-main', r.meet, 'Join'), anchor('ch-act', r.lms, 'Course page'));
+      tr.append(when, mk('td', null, r.course), mk('td', null, r.title), mk('td', null, t12(r.start) + ' to ' + t12(r.end)), open);
+      return tr;
+    }));
+  }
+
+  function renderExams() {
+    const table = $('.ch-exams');
+    const rows = load('exams', table.parentElement);
+    if (!rows) return;
+    const items = rows.slice().sort((a, b) => (a.date + a.start).localeCompare(b.date + b.start));
+    table.tBodies[0].replaceChildren(...items.map((r) => {
+      const tr = mk('tr');
+      tr.dataset.key = r.id;
+      tr.append(mk('td', null, fmtDay(parse(r.date))), mk('td', null, t12(r.start) + ' to ' + t12(r.end)), mk('td', null, r.course), mk('td', null, r.title));
+      return tr;
+    }));
+  }
+
+  function renderChecklist() {
+    const box = $('.ch-list');
+    const rows = load('checklist', box);
+    if (!rows) return;
+    box.replaceChildren(...rows.map((r) => {
+      const li = mk('li');
+      li.append(mk('strong', null, r.item), mk('span', null, r.detail));
+      return li;
+    }));
+  }
+
+  function renderLinks() {
+    const box = $('.ch-links');
+    const rows = load('resources', box);
+    if (!rows) return;
+    const groups = new Map();
+    rows.forEach((r) => { if (!groups.has(r.group)) groups.set(r.group, []); groups.get(r.group).push(r); });
+    box.replaceChildren(...[...groups].map(([name, items]) => {
+      const g = mk('div', 'ch-group');
+      g.append(mk('h3', null, name));
+      items.forEach((r) => {
+        if (r.url) {
+          const a = anchor('ch-link', r.url);
+          a.append(mk('span', null, r.label + ' ↗'));
+          if (r.note) a.append(mk('small', null, r.note));
+          g.append(a);
+        } else {
+          const d = mk('div', 'ch-text');
+          const v = mk('span', 'ch-val', r.value);
+          const b = mk('button', 'ch-copy', 'Copy');
+          b.type = 'button';
+          b.addEventListener('click', async () => {
+            try { await navigator.clipboard.writeText(r.value); b.textContent = 'Copied'; }
+            catch (e) {
+              const range = document.createRange(); range.selectNodeContents(v);
+              const sel = window.getSelection(); sel.removeAllRanges(); sel.addRange(range); b.textContent = 'Selected';
+            }
+            setTimeout(() => { b.textContent = 'Copy'; }, 1800);
+          });
+          d.append(mk('span', null, r.label), v, b);
+          g.append(d);
+        }
+      });
+      return g;
+    }));
+  }
+
+  dash.onData(() => {
+    renderTake(); renderTiles(); renderWeeks(); renderClasses(); renderExams(); renderChecklist(); renderLinks();
+  });
+})();
+</script>
+</body></html>

@@ -6,6 +6,7 @@
 @media (prefers-color-scheme:dark){:root{--color-bg:#101512;--color-panel:#18201b;--color-fg:#eaf0ec;--color-fg-muted:#9aa8a0;--color-border-line:#2c3830;--cds-chart-muted:#26332b}}
 html,body{margin:0}body{background:var(--color-bg);color:var(--color-fg);padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) 32px max(16px,env(safe-area-inset-left))}
 @media (max-width:640px){.ch-classes thead{display:none}.ch-classes,.ch-classes tbody,.ch-classes tr,.ch-classes td{display:block;width:100%}.ch-classes tr{border-top:1px solid var(--color-border-line);padding:.5rem 0}.ch-classes td{border:0!important;padding:.15rem .25rem;background:none!important;white-space:normal!important}.ch-classes td:nth-child(2){font-weight:600}.ch-classes td:last-child{padding-top:.5rem}.ch-title{font-size:1.9rem}}
+#elective{border-top-color:var(--c-green)}#elective h2{color:var(--c-green)}.ch-steps{margin:0;padding-left:1.4rem;display:grid;gap:.6rem}.ch-steps li::marker{color:var(--c-green);font-weight:700}.ch-steps a{color:var(--c-blue)}
 </style></head><body>
 <style>
   .ch { max-width: 72rem; margin-inline: auto; display: grid; gap: var(--cds-gap-lg); font-family: var(--font-anthropic-sans); color: var(--color-fg); }
@@ -153,6 +154,19 @@ html,body{margin:0}body{background:var(--color-bg);color:var(--color-fg);padding
         <tbody></tbody>
       </table>
     </div>
+  </section>
+
+  <section class="ch-card" id="elective">
+    <h2>Choose or change your elective</h2>
+    <p class="ch-note">Your exam is GST 125 or GST 127, whichever you registered for. Register through the Miva support portal.</p>
+    <ol class="ch-steps">
+      <li>Open the <a href="https://support.miva.university/portal/en/home" target="_blank" rel="noopener noreferrer">Support Portal</a> and sign in with Google using your student email. Set a login password if it asks.</li>
+      <li>Go to <strong>My Zone</strong>, then <strong>Add a Ticket</strong>.</li>
+      <li>Fill the form: <strong>Subject</strong> Course Registration. <strong>Classification</strong> Enrollments and Deferments. <strong>Case</strong> Add Course. <strong>Nature of Case</strong> Service Request.</li>
+      <li>In the Description, write which elective you want: <strong>GST 125</strong> Contemporary Health Issues, or <strong>GST 127</strong> Environment and Sustainability. Submit and they process it.</li>
+    </ol>
+    <p class="ch-note">Already registered and want to switch? Raise the same ticket and say you are changing from one elective to the other.</p>
+    <div><a class="ch-act is-main" href="https://support.miva.university/portal/en/home" target="_blank" rel="noopener noreferrer">Open the Support Portal</a></div>
   </section>
 
   <section class="ch-card" id="checklist">

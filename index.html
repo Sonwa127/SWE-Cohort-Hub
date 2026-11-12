@@ -126,6 +126,7 @@ html,body{margin:0}body{background:var(--color-bg);color:var(--color-fg);padding
   <section class="ch-card" id="classes">
     <h2>Live classes</h2>
     <p class="ch-note">All times are Lagos time. Tap Join at class time, using your school email.</p>
+    <div><button class="ch-act is-main" id="ics-all" type="button">Add all classes to my calendar</button></div>
     <div class="ch-scroll">
       <table class="ch-table ch-classes" data-source="classes" data-row-key="id" hidden>
         <thead><tr>
@@ -285,12 +286,43 @@ const d3={timeFormat:(f)=>{const D=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],M
     $('.ch-weeks-note').textContent = 'Assessments open after weeks ' + mid + ' and ' + end + '. The week number updates itself every Monday.';
   }
 
+  const pad2 = (n) => String(n).padStart(2, '0');
+  const utcStamp = (dateStr, timeStr) => {
+    const [y, mo, d] = dateStr.split('-').map(Number), [hh, mm] = timeStr.split(':').map(Number);
+    const t = new Date(Date.UTC(y, mo - 1, d, hh - 1, mm)); // Lagos is UTC+1
+    return t.getUTCFullYear() + pad2(t.getUTCMonth() + 1) + pad2(t.getUTCDate()) + 'T' + pad2(t.getUTCHours()) + pad2(t.getUTCMinutes()) + '00Z';
+  };
+  const gcalLink = (r) => 'https://calendar.google.com/calendar/render?action=TEMPLATE&text=' + encodeURIComponent(r.course + ' live class: ' + r.title) + '&dates=' + utcStamp(r.date, r.start) + '/' + utcStamp(r.date, r.end) + '&details=' + encodeURIComponent('Join: ' + r.meet) + '&location=' + encodeURIComponent(r.meet);
+  const icsEsc = (s) => String(s).replace(/\\/g, '\\\\').replace(/,/g, '\\,').replace(/;/g, '\\;').replace(/\n/g, '\\n');
+  let currentClasses = [];
+  const buildIcs = (items) => {
+    const L = ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//SWE Cohort Hub//EN', 'CALSCALE:GREGORIAN'];
+    items.forEach((r) => {
+      L.push('BEGIN:VEVENT', 'UID:' + r.id + '@swe-cohort-hub', 'DTSTAMP:' + utcStamp(r.date, '00:00'),
+        'DTSTART:' + utcStamp(r.date, r.start), 'DTEND:' + utcStamp(r.date, r.end),
+        'SUMMARY:' + icsEsc(r.course + ' live class: ' + r.title), 'DESCRIPTION:' + icsEsc('Join: ' + r.meet), 'LOCATION:' + icsEsc(r.meet),
+        'BEGIN:VALARM', 'TRIGGER:-PT15M', 'ACTION:DISPLAY', 'DESCRIPTION:Class starts in 15 minutes', 'END:VALARM', 'END:VEVENT');
+    });
+    L.push('END:VCALENDAR');
+    return L.join('\r\n');
+  };
+  const btn = document.getElementById('ics-all');
+  if (btn) btn.addEventListener('click', () => {
+    if (!currentClasses.length) return;
+    const a = document.createElement('a');
+    a.href = 'data:text/calendar;charset=utf-8,' + encodeURIComponent(buildIcs(currentClasses));
+    a.download = 'cohort-live-classes.ics';
+    document.body.appendChild(a); a.click(); a.remove();
+  });
+
   function renderClasses() {
     const table = $('.ch-classes'), empty = $('.ch-classes-empty');
     const rows = load('classes', table.parentElement);
     if (!rows) return;
     const items = rows.map((r) => ({ ...r, d: parse(r.date) })).filter((r) => daysTo(r.d) >= 0)
       .sort((a, b) => (a.date + a.start).localeCompare(b.date + b.start));
+    currentClasses = items;
+    if (btn) btn.hidden = items.length === 0;
     table.hidden = items.length === 0;
     empty.hidden = items.length !== 0;
     table.tBodies[0].replaceChildren(...items.map((r) => {
@@ -299,7 +331,7 @@ const d3={timeFormat:(f)=>{const D=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],M
       const when = mk('td', null, fmtDay(r.d));
       if (daysTo(r.d) <= 1) when.append(mk('span', 'ch-pill', rel(r.d)));
       const open = mk('td');
-      open.append(anchor('ch-act is-main', r.meet, 'Join')); if (r.lms) open.append(anchor('ch-act', r.lms, 'Course page'));
+      open.append(anchor('ch-act is-main', r.meet, 'Join')); if (r.lms) open.append(anchor('ch-act', r.lms, 'Course page')); open.append(anchor('ch-act', gcalLink(r), 'Add to calendar'));
       tr.append(when, mk('td', null, r.course), mk('td', null, r.title), mk('td', null, t12(r.start) + ' to ' + t12(r.end)), open);
       return tr;
     }));

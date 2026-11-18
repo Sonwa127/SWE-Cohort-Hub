@@ -9,8 +9,31 @@ html,body{margin:0}body{background:var(--color-bg);color:var(--color-fg);padding
 #elective{border-top-color:var(--c-green)}#elective h2{color:var(--c-green)}.ch-steps{margin:0;padding-left:1.4rem;display:grid;gap:.6rem}.ch-steps li::marker{color:var(--c-green);font-weight:700}.ch-steps a{color:var(--c-blue)}
 .ch-week{min-width:0!important;flex:1 1 3.2rem!important}.ch-week-tag{font-size:.68rem!important;line-height:1.15;white-space:nowrap;overflow:visible;text-align:center}.ch-week>*{min-width:0}
 @media (max-width:640px){.ch-classes td:last-child{display:flex;flex-wrap:wrap;gap:.5rem}.ch-classes td:last-child .ch-act{margin-right:0}.ch-exams td:last-child{white-space:nowrap}}
-#gst111{border-top-color:var(--c-violet)}#gst111 h2{color:var(--c-violet)}.ch-topics{display:grid;gap:.5rem}.ch-topic{border:1px solid var(--color-border-line);border-radius:10px;padding:.25rem .75rem;background:var(--c-violet-bg)}.ch-topic summary{cursor:pointer;font-weight:600;padding:.5rem 0}.ch-count{font-weight:400;color:var(--color-fg-muted);font-size:.8rem;margin-left:.35rem}.ch-qs{margin:.25rem 0 .5rem;padding-left:1.6rem;display:grid;gap:.75rem}.ch-qs li::marker{color:var(--c-violet);font-weight:700}.ch-opts{color:var(--color-fg-muted);font-size:.85rem;margin-top:.15rem}.ch-ans{margin-top:.25rem;color:var(--c-green);font-weight:600}.ch-check{background:var(--c-amber-bg);color:var(--c-amber);border:1px solid var(--c-amber);border-radius:999px;padding:0 .4rem;font-size:.72rem;font-weight:600}
-.ch-missing{border:1px dashed var(--c-amber);border-radius:8px;padding:.5rem .6rem;background:var(--c-amber-bg)}.ch-missing .ch-q{color:var(--c-amber);font-weight:600}
+#gst111{border-top-color:var(--c-violet)}#gst111 h2{color:var(--c-violet)}
+.gq-bar{display:flex;flex-wrap:wrap;gap:.5rem}.gq-bar .ch-act{margin:0;font:inherit;cursor:pointer;background:transparent}.gq-bar .ch-act.is-main{background:var(--c-green)}
+.gq-topics{display:grid;gap:.6rem}
+.gq-topic{border:1px solid var(--color-border-line);border-radius:12px;background:var(--color-panel);overflow:hidden}
+.gq-topic summary{list-style:none;display:flex;align-items:center;justify-content:space-between;gap:.75rem;padding:.8rem 1rem;cursor:pointer;font-weight:600;background:var(--c-violet-bg);color:var(--c-violet)}
+.gq-topic summary::-webkit-details-marker{display:none}
+.gq-topic summary::after{content:"+";font-size:1.3rem;line-height:1;margin-left:auto;padding-left:.5rem}
+.gq-topic[open] summary::after{content:"\2212"}
+.gq-count{order:2;font-size:.78rem;font-weight:600;background:var(--c-violet);color:var(--c-on);border-radius:999px;padding:.05rem .55rem}
+.gq-name{flex:1;min-width:0}
+.gq-list{display:grid;gap:0}
+.gq{padding:1rem;border-top:1px solid var(--color-border-line);display:grid;gap:.65rem}
+.gq-head{display:flex;gap:.7rem;align-items:flex-start}
+.gq-num{flex:none;width:1.7rem;height:1.7rem;border-radius:50%;background:var(--c-violet-bg);color:var(--c-violet);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700}
+.gq-q{margin:0;font-weight:600;line-height:1.4}
+.gq-opts{list-style:none;margin:0;padding:0;display:grid;gap:.4rem}
+.gq-opt{display:flex;gap:.6rem;align-items:baseline;padding:.45rem .65rem;border:1px solid var(--color-border-line);border-radius:8px;min-width:0}
+.gq-opt b{flex:none;width:1.2rem;color:var(--color-fg-muted)}
+.gq-opt span{min-width:0;overflow-wrap:anywhere}
+#gst111:not(.is-hidden) .gq-opt.is-ans{background:var(--c-green-bg);border-color:var(--c-green);color:var(--c-green);font-weight:600}
+#gst111:not(.is-hidden) .gq-opt.is-ans b{color:var(--c-green)}
+#gst111:not(.is-hidden) .gq-opt.is-ans::after{content:"\2713";margin-left:auto;padding-left:.5rem}
+.gq-extra{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;font-size:.82rem;color:var(--color-fg-muted)}
+.gq-check{background:var(--c-amber-bg);color:var(--c-amber);border:1px solid var(--c-amber);border-radius:999px;padding:0 .5rem;font-weight:600;font-size:.72rem}
+#gst111.is-hidden .gq-extra{display:none}
 </style></head><body>
 <style>
   .ch { max-width: 72rem; margin-inline: auto; display: grid; gap: var(--cds-gap-lg); font-family: var(--font-anthropic-sans); color: var(--color-fg); }
@@ -165,68 +188,304 @@ html,body{margin:0}body{background:var(--color-bg);color:var(--color-fg);padding
 
   <section class="ch-card" id="gst111">
     <h2>GST 111 areas of concentration</h2>
-    <p class="ch-note">Communication in English, 10 topics. These are 38 practice questions with answers worked out from the lecture slides, not an official answer key. Answers marked <strong>check</strong> are less certain, so confirm them with your lecturer or notes.</p>
-    <div class="ch-topics">
-      <details class="ch-topic"><summary>1. Communication <span class="ch-count">10 questions</span></summary><ol class="ch-qs">
-        <li value="1"><div class="ch-q">We know the feelings and emotions of one another through ___.</div><div class="ch-opts">A partnership; B relationship; C communication; D education</div><div class="ch-ans">Answer: C. communication</div></li>
-        <li value="2"><div class="ch-q">The two common factors in the definition of communication are ___ and ___.</div><div class="ch-opts">A sharing and exchanging; B feelings and thoughts; C speaking and listening; D writing and punctuation</div><div class="ch-ans">Answer: A. sharing and exchanging <span class="ch-check">check</span></div></li>
-        <li value="3"><div class="ch-q">The type of communication that involves gestures and body signs is ___.</div><div class="ch-opts">A verbal; B interpersonal; C non-verbal; D intrapersonal</div><div class="ch-ans">Answer: C. non-verbal</div></li>
-        <li value="4"><div class="ch-q">___ communication is the type that takes place within you.</div><div class="ch-opts">A personal; B intrapersonal; C interpersonal; D private</div><div class="ch-ans">Answer: B. intrapersonal</div></li>
-        <li value="5"><div class="ch-q">Which type of communication pays attention to hierarchy and specific linguistic choices?</div><div class="ch-opts">A formal; B informal; C interpersonal; D verbal</div><div class="ch-ans">Answer: A. formal</div></li>
-        <li value="6"><div class="ch-q">The medium through which a message is transferred is the ___.</div><div class="ch-opts">A channel; B vessel; C means; D feedback</div><div class="ch-ans">Answer: A. channel</div></li>
-        <li value="7"><div class="ch-q">The last basic element of communication is the ___.</div><div class="ch-opts">A decoder; B receiver; C sender; D feedback</div><div class="ch-ans">Answer: D. feedback</div></li>
-        <li value="8"><div class="ch-q">The first communication skill we acquire is ___.</div><div class="ch-opts">A reading; B writing; C listening; D speaking</div><div class="ch-ans">Answer: C. listening</div></li>
-        <li value="10"><div class="ch-q">Communication skills are also known as ___ skills.</div><div class="ch-opts">A expressive; B receptive; C language; D productive</div><div class="ch-ans">Answer: C. language <span class="ch-check">check</span></div></li>
-        <li value="11"><div class="ch-q">Avoiding wordiness and observing brevity addresses which of the 7 Cs?</div><div class="ch-opts">A conciseness; B clarity; C completeness; D consideration</div><div class="ch-ans">Answer: A. conciseness</div></li>
-      </ol></details>
-      <details class="ch-topic"><summary>2. Writing <span class="ch-count">8 questions</span></summary><ol class="ch-qs">
-        <li value="12"><div class="ch-q">___ is the expressive form of communication where the audience may be known or unknown.</div><div class="ch-opts">A speaking; B writing; C listening; D reading</div><div class="ch-ans">Answer: B. writing</div></li>
-        <li value="13"><div class="ch-q">The two most important factors to consider before writing are ___ and ___.</div><div class="ch-opts">A medium and platform; B language and style; C audience and purpose; D time and space</div><div class="ch-ans">Answer: C. audience and purpose</div></li>
-        <li value="15"><div class="ch-q">Which type of writing will you use to convince your best friend to enroll in MIVA Open University?</div><div class="ch-opts">A persuasive; B narrative; C descriptive; D expository</div><div class="ch-ans">Answer: A. persuasive</div></li>
-        <li value="16"><div class="ch-q">Adamu included a list of references in the document he uploaded. What form of writing did he submit?</div><div class="ch-opts">A creative; B academic; C journalistic; D technical</div><div class="ch-ans">Answer: B. academic</div></li>
-        <li value="17"><div class="ch-q">The three basic elements of writing skills are ___, ___ and ___.</div><div class="ch-opts">A Expressive, Presentation and Linguistics; B Linguistics, Composition and Presentation; C Presentation, Expressive and Composition; D Composition, Linguistics and Expressive</div><div class="ch-ans">Answer: B. Linguistics, Composition and Presentation</div></li>
-        <li value="19"><div class="ch-q">The first stage of writing is known as ___.</div><div class="ch-opts">A drafting; B writing; C pre-writing; D post-writing</div><div class="ch-ans">Answer: C. pre-writing</div></li>
-        <li value="22"><div class="ch-q">Peter submitted a term paper without citing the sources of his claims. He is guilty of ___.</div><div class="ch-opts">A regurgitating; B copying; C plagiarism; D piracy</div><div class="ch-ans">Answer: C. plagiarism</div></li>
-        <li value="29"><div class="ch-q">Sit at the extreme end of the chair. The error in this sentence is known as ___.</div><div class="ch-opts">A redundancy; B ambiguity; C agreement; D reduplication</div><div class="ch-ans">Answer: A. redundancy <span class="ch-check">check</span></div></li>
-      </ol></details>
-      <details class="ch-topic"><summary>3. Preposition <span class="ch-count">1 question</span></summary><ol class="ch-qs">
-        <li value="24"><div class="ch-q">The man ___ &#x27;agbada&#x27; is my father.</div><div class="ch-opts">A on; B inside; C under; D in</div><div class="ch-ans">Answer: D. in</div></li>
-      </ol></details>
-      <details class="ch-topic"><summary>4. Sentences <span class="ch-count">5 questions</span></summary><ol class="ch-qs">
-        <li value="18"><div class="ch-q">Which of the following sentences suggests an invitation to Sussan?</div><div class="ch-opts">A Let&#x27;s eat Sussan.; B Lets eat, Sussan.; C Lets eat Sussan.; D Let&#x27;s eat, Sussan.</div><div class="ch-ans">Answer: D. Let&#x27;s eat, Sussan.</div></li>
-        <li value="27"><div class="ch-q">Which of the following is a compound sentence?</div><div class="ch-opts">A When Paul entered the class, the girl smiled.; B Paul, who was my friend, entered the class.; C Paul entered the class.; D Paul entered the class and the girl smiled</div><div class="ch-ans">Answer: D. Paul entered the class and the girl smiled</div></li>
-        <li value="37"><div class="ch-q">Which of the following is not a coordinating conjunction?</div><div class="ch-opts">A or; B but; C because; D so</div><div class="ch-ans">Answer: C. because (it is subordinating)</div></li>
-        <li value="38"><div class="ch-q">Such an amazing speech! This is an example of a/an ___ sentence.</div><div class="ch-opts">A declarative; B exclamatory; C interrogative; D imperative</div><div class="ch-ans">Answer: B. exclamatory</div></li>
-        <li value="39"><div class="ch-q">The receiver of the action in a sentence is called the ___.</div><div class="ch-opts">A subject; B predicate; C complement; D object</div><div class="ch-ans">Answer: D. object</div></li>
-      </ol></details>
-      <details class="ch-topic"><summary>5. Phrase <span class="ch-count">1 question</span></summary><ol class="ch-qs">
-        <li value="26"><div class="ch-q">The house behind the church is ours. The underlined words (behind the church) are a/an ___ phrase.</div><div class="ch-opts">A noun; B prepositional; C adjectival; D verb</div><div class="ch-ans">Answer: B. prepositional <span class="ch-check">check</span></div></li>
-      </ol></details>
-      <details class="ch-topic"><summary>6. Essay <span class="ch-count">2 questions</span></summary><ol class="ch-qs">
-        <li value="14"><div class="ch-q">Tope wrote about an incident that occurred in Wuse market last week. Her essay is a ___ type.</div><div class="ch-opts">A descriptive; B argumentative; C expository; D narrative</div><div class="ch-ans">Answer: D. narrative</div></li>
-        <li value="23"><div class="ch-q">The thesis statement is found in the ___ part of an essay.</div><div class="ch-opts">A introduction; B body; C conclusion; D summary</div><div class="ch-ans">Answer: A. introduction</div></li>
-      </ol></details>
-      <details class="ch-topic"><summary>7. Paragraph <span class="ch-count">3 questions</span></summary><ol class="ch-qs">
-        <li value="21"><div class="ch-q">The logical connection of ideas in a piece of writing is known as ___.</div><div class="ch-opts">A coherence; B cohesion; C conciseness; D completion</div><div class="ch-ans">Answer: A. coherence <span class="ch-check">check</span></div></li>
-        <li value="32"><div class="ch-q">The unit of discourse in an essay is referred to as a ___.</div><div class="ch-opts">A sentence; B paragraph; C body; D transition</div><div class="ch-ans">Answer: B. paragraph</div></li>
-        <li value="33"><div class="ch-q">The act of giving prominence to a single idea in a paragraph is referred to as ___.</div><div class="ch-opts">A completeness; B unity; C emphasis; D clarity</div><div class="ch-ans">Answer: C. emphasis</div></li>
-      </ol></details>
-      <details class="ch-topic"><summary>8. Transition <span class="ch-count">2 questions</span></summary><ol class="ch-qs">
-        <li value="28"><div class="ch-q">___ phrases ensure a smooth flow and logical progression between paragraphs.</div><div class="ch-opts">A noun; B verb; C transitional; D prepositional</div><div class="ch-ans">Answer: C. transitional</div></li>
-        <li value="34"><div class="ch-q">&quot;Consequently, Jamiu passed in flying colours.&quot; The word &#x27;consequently&#x27; in this expression is an example of ___.</div><div class="ch-opts">A adjectival; B nominal; C reflective; D transition</div><div class="ch-ans">Answer: D. transition</div></li>
-      </ol></details>
-      <details class="ch-topic"><summary>9. Verb <span class="ch-count">1 question</span></summary><ol class="ch-qs">
-        <li value="35"><div class="ch-q">The position of predicator in a sentence is occupied by a/an ___.</div><div class="ch-opts">A noun; B verb; C pronoun; D adverb</div><div class="ch-ans">Answer: B. verb</div></li>
-      </ol></details>
-      <details class="ch-topic"><summary>10. Comprehension <span class="ch-count">1 question</span></summary><ol class="ch-qs">
-        <li value="40"><div class="ch-q">The factors that affect comprehension are classified as ___ and ___.</div><div class="ch-opts">A linguistic and psychological; B linguistic and stylistic; C stylistic and psychological; D psychological and visualisation</div><div class="ch-ans">Answer: A. linguistic and psychological</div></li>
-      </ol></details>
-      <details class="ch-topic"><summary>Extra: adverbs, punctuation, abbreviations <span class="ch-count">4 questions</span></summary><ol class="ch-qs">
-        <li value="20"><div class="ch-q">I will pay you back ___.</div><div class="ch-opts">A installmentally; B installmentingly; C in installments; D installmentedly</div><div class="ch-ans">Answer: C. in installments</div></li>
-        <li value="25"><div class="ch-q">___ enough, I haven&#x27;t been to the zoo before.</div><div class="ch-opts">A funny; B funningly; C funnily; D fun</div><div class="ch-ans">Answer: C. funnily</div></li>
-        <li value="30"><div class="ch-q">The punctuation mark enclosed in the bracket ({ }) is known as ___.</div><div class="ch-opts">A ellipses; B braces; C caret; D semi-colon</div><div class="ch-ans">Answer: B. braces</div></li>
-        <li value="31"><div class="ch-q">WAEC (West Africa Examination Council) is an example of a/an ___.</div><div class="ch-opts">A acronym; B abbreviation; C mnemonics; D meme</div><div class="ch-ans">Answer: B. abbreviation (it is read letter by letter, so not an acronym)</div></li>
-      </ol></details>
+    <p class="ch-note">Communication in English. 38 practice questions across 10 topics, with answers worked out from the lecture slides (not an official answer key). Answers tagged <strong>check</strong> are less certain, so confirm them in your notes.</p>
+    <div class="gq-bar"><button type="button" class="ch-act" id="gq-toggle" aria-pressed="false">Hide answers to practise</button><a class="ch-act is-main" href="GST-111-Questions-and-Answers.pdf" target="_blank" rel="noopener noreferrer">Download the PDF</a></div>
+    <div class="gq-topics">
+      <details class="gq-topic"><summary><span class="gq-name">Communication</span><span class="gq-count">10</span></summary><div class="gq-list">
+        <article class="gq"><div class="gq-head"><span class="gq-num">1</span><p class="gq-q">We know the feelings and emotions of one another through ___.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>partnership</span></li>
+          <li class="gq-opt"><b>B</b><span>relationship</span></li>
+          <li class="gq-opt is-ans"><b>C</b><span>communication</span></li>
+          <li class="gq-opt"><b>D</b><span>education</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">2</span><p class="gq-q">The two common factors in the definition of communication are ___ and ___.</p></div><ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>sharing and exchanging</span></li>
+          <li class="gq-opt"><b>B</b><span>feelings and thoughts</span></li>
+          <li class="gq-opt"><b>C</b><span>speaking and listening</span></li>
+          <li class="gq-opt"><b>D</b><span>writing and punctuation</span></li>
+        </ul>
+        <div class="gq-extra"><span class="gq-check">check</span></div>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">3</span><p class="gq-q">The type of communication that involves gestures and body signs is ___.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>verbal</span></li>
+          <li class="gq-opt"><b>B</b><span>interpersonal</span></li>
+          <li class="gq-opt is-ans"><b>C</b><span>non-verbal</span></li>
+          <li class="gq-opt"><b>D</b><span>intrapersonal</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">4</span><p class="gq-q">___ communication is the type that takes place within you.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>personal</span></li>
+          <li class="gq-opt is-ans"><b>B</b><span>intrapersonal</span></li>
+          <li class="gq-opt"><b>C</b><span>interpersonal</span></li>
+          <li class="gq-opt"><b>D</b><span>private</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">5</span><p class="gq-q">Which type of communication pays attention to hierarchy and specific linguistic choices?</p></div><ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>formal</span></li>
+          <li class="gq-opt"><b>B</b><span>informal</span></li>
+          <li class="gq-opt"><b>C</b><span>interpersonal</span></li>
+          <li class="gq-opt"><b>D</b><span>verbal</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">6</span><p class="gq-q">The medium through which a message is transferred is the ___.</p></div><ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>channel</span></li>
+          <li class="gq-opt"><b>B</b><span>vessel</span></li>
+          <li class="gq-opt"><b>C</b><span>means</span></li>
+          <li class="gq-opt"><b>D</b><span>feedback</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">7</span><p class="gq-q">The last basic element of communication is the ___.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>decoder</span></li>
+          <li class="gq-opt"><b>B</b><span>receiver</span></li>
+          <li class="gq-opt"><b>C</b><span>sender</span></li>
+          <li class="gq-opt is-ans"><b>D</b><span>feedback</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">8</span><p class="gq-q">The first communication skill we acquire is ___.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>reading</span></li>
+          <li class="gq-opt"><b>B</b><span>writing</span></li>
+          <li class="gq-opt is-ans"><b>C</b><span>listening</span></li>
+          <li class="gq-opt"><b>D</b><span>speaking</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">9</span><p class="gq-q">Communication skills are also known as ___ skills.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>expressive</span></li>
+          <li class="gq-opt"><b>B</b><span>receptive</span></li>
+          <li class="gq-opt is-ans"><b>C</b><span>language</span></li>
+          <li class="gq-opt"><b>D</b><span>productive</span></li>
+        </ul>
+        <div class="gq-extra"><span class="gq-check">check</span></div>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">10</span><p class="gq-q">Avoiding wordiness and observing brevity addresses which of the 7 Cs?</p></div><ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>conciseness</span></li>
+          <li class="gq-opt"><b>B</b><span>clarity</span></li>
+          <li class="gq-opt"><b>C</b><span>completeness</span></li>
+          <li class="gq-opt"><b>D</b><span>consideration</span></li>
+        </ul>
+      </article>
+      </div></details>
+      <details class="gq-topic"><summary><span class="gq-name">Writing</span><span class="gq-count">8</span></summary><div class="gq-list">
+        <article class="gq"><div class="gq-head"><span class="gq-num">11</span><p class="gq-q">___ is the expressive form of communication where the audience may be known or unknown.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>speaking</span></li>
+          <li class="gq-opt is-ans"><b>B</b><span>writing</span></li>
+          <li class="gq-opt"><b>C</b><span>listening</span></li>
+          <li class="gq-opt"><b>D</b><span>reading</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">12</span><p class="gq-q">The two most important factors to consider before writing are ___ and ___.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>medium and platform</span></li>
+          <li class="gq-opt"><b>B</b><span>language and style</span></li>
+          <li class="gq-opt is-ans"><b>C</b><span>audience and purpose</span></li>
+          <li class="gq-opt"><b>D</b><span>time and space</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">13</span><p class="gq-q">Which type of writing will you use to convince your best friend to enroll in MIVA Open University?</p></div><ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>persuasive</span></li>
+          <li class="gq-opt"><b>B</b><span>narrative</span></li>
+          <li class="gq-opt"><b>C</b><span>descriptive</span></li>
+          <li class="gq-opt"><b>D</b><span>expository</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">14</span><p class="gq-q">Adamu included a list of references in the document he uploaded. What form of writing did he submit?</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>creative</span></li>
+          <li class="gq-opt is-ans"><b>B</b><span>academic</span></li>
+          <li class="gq-opt"><b>C</b><span>journalistic</span></li>
+          <li class="gq-opt"><b>D</b><span>technical</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">15</span><p class="gq-q">The three basic elements of writing skills are ___, ___ and ___.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>Expressive, Presentation and Linguistics</span></li>
+          <li class="gq-opt is-ans"><b>B</b><span>Linguistics, Composition and Presentation</span></li>
+          <li class="gq-opt"><b>C</b><span>Presentation, Expressive and Composition</span></li>
+          <li class="gq-opt"><b>D</b><span>Composition, Linguistics and Expressive</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">16</span><p class="gq-q">The first stage of writing is known as ___.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>drafting</span></li>
+          <li class="gq-opt"><b>B</b><span>writing</span></li>
+          <li class="gq-opt is-ans"><b>C</b><span>pre-writing</span></li>
+          <li class="gq-opt"><b>D</b><span>post-writing</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">17</span><p class="gq-q">Peter submitted a term paper without citing the sources of his claims. He is guilty of ___.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>regurgitating</span></li>
+          <li class="gq-opt"><b>B</b><span>copying</span></li>
+          <li class="gq-opt is-ans"><b>C</b><span>plagiarism</span></li>
+          <li class="gq-opt"><b>D</b><span>piracy</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">18</span><p class="gq-q">Sit at the extreme end of the chair. The error in this sentence is known as ___.</p></div><ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>redundancy</span></li>
+          <li class="gq-opt"><b>B</b><span>ambiguity</span></li>
+          <li class="gq-opt"><b>C</b><span>agreement</span></li>
+          <li class="gq-opt"><b>D</b><span>reduplication</span></li>
+        </ul>
+        <div class="gq-extra"><span class="gq-check">check</span></div>
+      </article>
+      </div></details>
+      <details class="gq-topic"><summary><span class="gq-name">Preposition</span><span class="gq-count">1</span></summary><div class="gq-list">
+        <article class="gq"><div class="gq-head"><span class="gq-num">19</span><p class="gq-q">The man ___ &#x27;agbada&#x27; is my father.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>on</span></li>
+          <li class="gq-opt"><b>B</b><span>inside</span></li>
+          <li class="gq-opt"><b>C</b><span>under</span></li>
+          <li class="gq-opt is-ans"><b>D</b><span>in</span></li>
+        </ul>
+      </article>
+      </div></details>
+      <details class="gq-topic"><summary><span class="gq-name">Sentences</span><span class="gq-count">5</span></summary><div class="gq-list">
+        <article class="gq"><div class="gq-head"><span class="gq-num">20</span><p class="gq-q">Which of the following sentences suggests an invitation to Sussan?</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>Let&#x27;s eat Sussan.</span></li>
+          <li class="gq-opt"><b>B</b><span>Lets eat, Sussan.</span></li>
+          <li class="gq-opt"><b>C</b><span>Lets eat Sussan.</span></li>
+          <li class="gq-opt is-ans"><b>D</b><span>Let&#x27;s eat, Sussan.</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">21</span><p class="gq-q">Which of the following is a compound sentence?</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>When Paul entered the class, the girl smiled.</span></li>
+          <li class="gq-opt"><b>B</b><span>Paul, who was my friend, entered the class.</span></li>
+          <li class="gq-opt"><b>C</b><span>Paul entered the class.</span></li>
+          <li class="gq-opt is-ans"><b>D</b><span>Paul entered the class and the girl smiled</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">22</span><p class="gq-q">Which of the following is not a coordinating conjunction?</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>or</span></li>
+          <li class="gq-opt"><b>B</b><span>but</span></li>
+          <li class="gq-opt is-ans"><b>C</b><span>because</span></li>
+          <li class="gq-opt"><b>D</b><span>so</span></li>
+        </ul>
+        <div class="gq-extra"><span class="gq-note">Because is a subordinating conjunction.</span></div>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">23</span><p class="gq-q">Such an amazing speech! This is an example of a/an ___ sentence.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>declarative</span></li>
+          <li class="gq-opt is-ans"><b>B</b><span>exclamatory</span></li>
+          <li class="gq-opt"><b>C</b><span>interrogative</span></li>
+          <li class="gq-opt"><b>D</b><span>imperative</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">24</span><p class="gq-q">The receiver of the action in a sentence is called the ___.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>subject</span></li>
+          <li class="gq-opt"><b>B</b><span>predicate</span></li>
+          <li class="gq-opt"><b>C</b><span>complement</span></li>
+          <li class="gq-opt is-ans"><b>D</b><span>object</span></li>
+        </ul>
+      </article>
+      </div></details>
+      <details class="gq-topic"><summary><span class="gq-name">Phrase</span><span class="gq-count">1</span></summary><div class="gq-list">
+        <article class="gq"><div class="gq-head"><span class="gq-num">25</span><p class="gq-q">The house behind the church is ours. The underlined words (behind the church) are a/an ___ phrase.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>noun</span></li>
+          <li class="gq-opt is-ans"><b>B</b><span>prepositional</span></li>
+          <li class="gq-opt"><b>C</b><span>adjectival</span></li>
+          <li class="gq-opt"><b>D</b><span>verb</span></li>
+        </ul>
+        <div class="gq-extra"><span class="gq-check">check</span><span class="gq-note">It also works as an adjectival phrase because it describes the house.</span></div>
+      </article>
+      </div></details>
+      <details class="gq-topic"><summary><span class="gq-name">Essay</span><span class="gq-count">2</span></summary><div class="gq-list">
+        <article class="gq"><div class="gq-head"><span class="gq-num">26</span><p class="gq-q">Tope wrote about an incident that occurred in Wuse market last week. Her essay is a ___ type.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>descriptive</span></li>
+          <li class="gq-opt"><b>B</b><span>argumentative</span></li>
+          <li class="gq-opt"><b>C</b><span>expository</span></li>
+          <li class="gq-opt is-ans"><b>D</b><span>narrative</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">27</span><p class="gq-q">The thesis statement is found in the ___ part of an essay.</p></div><ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>introduction</span></li>
+          <li class="gq-opt"><b>B</b><span>body</span></li>
+          <li class="gq-opt"><b>C</b><span>conclusion</span></li>
+          <li class="gq-opt"><b>D</b><span>summary</span></li>
+        </ul>
+      </article>
+      </div></details>
+      <details class="gq-topic"><summary><span class="gq-name">Paragraph</span><span class="gq-count">3</span></summary><div class="gq-list">
+        <article class="gq"><div class="gq-head"><span class="gq-num">28</span><p class="gq-q">The logical connection of ideas in a piece of writing is known as ___.</p></div><ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>coherence</span></li>
+          <li class="gq-opt"><b>B</b><span>cohesion</span></li>
+          <li class="gq-opt"><b>C</b><span>conciseness</span></li>
+          <li class="gq-opt"><b>D</b><span>completion</span></li>
+        </ul>
+        <div class="gq-extra"><span class="gq-check">check</span><span class="gq-note">Cohesion is the grammatical linking of sentences.</span></div>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">29</span><p class="gq-q">The unit of discourse in an essay is referred to as a ___.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>sentence</span></li>
+          <li class="gq-opt is-ans"><b>B</b><span>paragraph</span></li>
+          <li class="gq-opt"><b>C</b><span>body</span></li>
+          <li class="gq-opt"><b>D</b><span>transition</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">30</span><p class="gq-q">The act of giving prominence to a single idea in a paragraph is referred to as ___.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>completeness</span></li>
+          <li class="gq-opt"><b>B</b><span>unity</span></li>
+          <li class="gq-opt is-ans"><b>C</b><span>emphasis</span></li>
+          <li class="gq-opt"><b>D</b><span>clarity</span></li>
+        </ul>
+      </article>
+      </div></details>
+      <details class="gq-topic"><summary><span class="gq-name">Transition</span><span class="gq-count">2</span></summary><div class="gq-list">
+        <article class="gq"><div class="gq-head"><span class="gq-num">31</span><p class="gq-q">___ phrases ensure a smooth flow and logical progression between paragraphs.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>noun</span></li>
+          <li class="gq-opt"><b>B</b><span>verb</span></li>
+          <li class="gq-opt is-ans"><b>C</b><span>transitional</span></li>
+          <li class="gq-opt"><b>D</b><span>prepositional</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">32</span><p class="gq-q">&quot;Consequently, Jamiu passed in flying colours.&quot; The word &#x27;consequently&#x27; in this expression is an example of ___.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>adjectival</span></li>
+          <li class="gq-opt"><b>B</b><span>nominal</span></li>
+          <li class="gq-opt"><b>C</b><span>reflective</span></li>
+          <li class="gq-opt is-ans"><b>D</b><span>transition</span></li>
+        </ul>
+      </article>
+      </div></details>
+      <details class="gq-topic"><summary><span class="gq-name">Verb</span><span class="gq-count">1</span></summary><div class="gq-list">
+        <article class="gq"><div class="gq-head"><span class="gq-num">33</span><p class="gq-q">The position of predicator in a sentence is occupied by a/an ___.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>noun</span></li>
+          <li class="gq-opt is-ans"><b>B</b><span>verb</span></li>
+          <li class="gq-opt"><b>C</b><span>pronoun</span></li>
+          <li class="gq-opt"><b>D</b><span>adverb</span></li>
+        </ul>
+      </article>
+      </div></details>
+      <details class="gq-topic"><summary><span class="gq-name">Comprehension</span><span class="gq-count">1</span></summary><div class="gq-list">
+        <article class="gq"><div class="gq-head"><span class="gq-num">34</span><p class="gq-q">The factors that affect comprehension are classified as ___ and ___.</p></div><ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>linguistic and psychological</span></li>
+          <li class="gq-opt"><b>B</b><span>linguistic and stylistic</span></li>
+          <li class="gq-opt"><b>C</b><span>stylistic and psychological</span></li>
+          <li class="gq-opt"><b>D</b><span>psychological and visualisation</span></li>
+        </ul>
+      </article>
+      </div></details>
+      <details class="gq-topic"><summary><span class="gq-name">Extra: adverbs, punctuation, abbreviations</span><span class="gq-count">4</span></summary><div class="gq-list">
+        <article class="gq"><div class="gq-head"><span class="gq-num">35</span><p class="gq-q">I will pay you back ___.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>installmentally</span></li>
+          <li class="gq-opt"><b>B</b><span>installmentingly</span></li>
+          <li class="gq-opt is-ans"><b>C</b><span>in installments</span></li>
+          <li class="gq-opt"><b>D</b><span>installmentedly</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">36</span><p class="gq-q">___ enough, I haven&#x27;t been to the zoo before.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>funny</span></li>
+          <li class="gq-opt"><b>B</b><span>funningly</span></li>
+          <li class="gq-opt is-ans"><b>C</b><span>funnily</span></li>
+          <li class="gq-opt"><b>D</b><span>fun</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">37</span><p class="gq-q">The punctuation mark enclosed in the bracket ({ }) is known as ___.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>ellipses</span></li>
+          <li class="gq-opt is-ans"><b>B</b><span>braces</span></li>
+          <li class="gq-opt"><b>C</b><span>caret</span></li>
+          <li class="gq-opt"><b>D</b><span>semi-colon</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">38</span><p class="gq-q">WAEC (West Africa Examination Council) is an example of a/an ___.</p></div><ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>acronym</span></li>
+          <li class="gq-opt is-ans"><b>B</b><span>abbreviation</span></li>
+          <li class="gq-opt"><b>C</b><span>mnemonics</span></li>
+          <li class="gq-opt"><b>D</b><span>meme</span></li>
+        </ul>
+        <div class="gq-extra"><span class="gq-note">It is read letter by letter, so it is not an acronym.</span></div>
+      </article>
+      </div></details>
     </div>
   </section>
 
@@ -492,5 +751,8 @@ const d3={timeFormat:(f)=>{const D=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],M
     renderTake(); renderTiles(); renderWeeks(); renderClasses(); renderExams(); renderChecklist(); renderLinks();
   });
 })();
+</script>
+<script>
+(function(){var b=document.getElementById('gq-toggle'),s=document.getElementById('gst111');if(!b||!s)return;b.addEventListener('click',function(){var hid=s.classList.toggle('is-hidden');b.setAttribute('aria-pressed',hid?'true':'false');b.textContent=hid?'Show answers':'Hide answers to practise';});})();
 </script>
 </body></html>

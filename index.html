@@ -247,15 +247,15 @@ const d3={timeFormat:(f)=>{const D=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],M
   const curWeek = (sem) => {
     const base = Number(val(sem, 'current_week')), end = Number(val(sem, 'end_assessment_week'));
     const passed = Math.round((monday(dayStart()) - monday(parse(val(sem, 'as_of')))) / (7 * 864e5));
-    return Math.max(1, Math.min(base + passed, end + 1));
+    return Math.max(1, Math.min(base + passed, 14));
   };
 
   function renderTake() {
     const el = $('.ch-take');
     const sem = dash.data('semester'), keys = dash.data('key_dates');
     if (sem.status !== 'ok' || keys.status !== 'ok') { el.textContent = ''; return; }
-    const cw = curWeek(sem.data), ew = Number(val(sem.data, 'end_assessment_week'));
-    let s = (cw > ew ? 'Semester teaching weeks are over.' : 'Week ' + cw + ' of the semester.');
+    const cw = curWeek(sem.data);
+    let s = 'Week ' + cw + ' of the semester.';
     const next = keys.data.map((r) => ({ ...r, d: parse(r.date) })).filter((r) => daysTo(r.d) >= 0).sort((a, b) => a.d - b.d)[0];
     if (next) s += ' Next: ' + next.label + ' on ' + fmtShort(next.d) + ', ' + rel(next.d).toLowerCase() + '.';
     el.textContent = s;
@@ -282,13 +282,13 @@ const d3={timeFormat:(f)=>{const D=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],M
     if (!sem) return;
     const cur = curWeek(sem), mid = Number(val(sem, 'mid_assessment_week')), end = Number(val(sem, 'end_assessment_week'));
     const out = [];
-    for (let w = 1; w <= end; w++) {
+    for (let w = 1; w <= 14; w++) {
       const cell = mk('div', 'ch-week' + (w < cur ? ' is-done' : w === cur ? ' is-now' : ''));
-      cell.append(mk('div', 'ch-chip', String(w)), mk('div', 'ch-week-tag', w === cur ? 'This week' : (w === mid || w === end) ? 'Assessment' : ''));
+      cell.append(mk('div', 'ch-chip', String(w)), mk('div', 'ch-week-tag', w === cur ? 'This week' : (w === mid || w === end) ? 'Assessment' : w === 13 ? 'Exams begin' : ''));
       out.push(cell);
     }
     box.replaceChildren(...out);
-    $('.ch-weeks-note').textContent = 'Assessments open after weeks ' + mid + ' and ' + end + '. The week number updates itself every Monday.';
+    $('.ch-weeks-note').textContent = 'Assessments open after weeks ' + mid + ' and ' + end + ', and both close on 15 November. Exams begin on 5 December, in week 13. The week number updates itself every Monday.';
   }
 
   const pad2 = (n) => String(n).padStart(2, '0');

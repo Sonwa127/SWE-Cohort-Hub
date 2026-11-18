@@ -34,6 +34,14 @@ html,body{margin:0}body{background:var(--color-bg);color:var(--color-fg);padding
 .gq-extra{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;font-size:.82rem;color:var(--color-fg-muted)}
 .gq-check{background:var(--c-amber-bg);color:var(--c-amber);border:1px solid var(--c-amber);border-radius:999px;padding:0 .5rem;font-weight:600;font-size:.72rem}
 #gst111.is-hidden .gq-extra{display:none}
+.gq-all>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:.75rem}
+.gq-all>summary::-webkit-details-marker{display:none}
+.gq-all-title{display:grid;gap:.2rem;min-width:0}.gq-all-title h2{margin:0}
+.gq-all-sub{color:var(--color-fg-muted);font-size:.85rem}
+.gq-all-icon{flex:none;width:2rem;height:2rem;border-radius:50%;background:var(--c-violet);color:var(--c-on);display:flex;align-items:center;justify-content:center;font-weight:700;font-size:1.2rem}
+.gq-all-icon::before{content:"+"}.gq-all[open]>summary .gq-all-icon::before{content:"\2212"}
+.gq-all[open] .gq-all-sub{display:none}
+.gq-all-body{display:grid;gap:var(--cds-gap-md);margin-top:var(--cds-gap-md)}
 </style></head><body>
 <style>
   .ch { max-width: 72rem; margin-inline: auto; display: grid; gap: var(--cds-gap-lg); font-family: var(--font-anthropic-sans); color: var(--color-fg); }
@@ -187,7 +195,7 @@ html,body{margin:0}body{background:var(--color-bg);color:var(--color-fg);padding
   </section>
 
   <section class="ch-card" id="gst111">
-    <h2>GST 111 areas of concentration</h2>
+    <details class="gq-all"><summary class="gq-all-sum"><span class="gq-all-title"><h2>GST 111 areas of concentration</h2><span class="gq-all-sub">38 practice questions with answers. Tap to open</span></span><span class="gq-all-icon" aria-hidden="true"></span></summary><div class="gq-all-body">
     <p class="ch-note">Communication in English. 38 practice questions across 10 topics, with answers worked out from the lecture slides (not an official answer key). Answers tagged <strong>check</strong> are less certain, so confirm them in your notes.</p>
     <div class="gq-bar"><button type="button" class="ch-act" id="gq-toggle" aria-pressed="false">Hide answers to practise</button><a class="ch-act is-main" href="GST-111-Questions-and-Answers.pdf" target="_blank" rel="noopener noreferrer">Download the PDF</a></div>
     <div class="gq-topics">
@@ -487,6 +495,7 @@ html,body{margin:0}body{background:var(--color-bg);color:var(--color-fg);padding
       </article>
       </div></details>
     </div>
+    </div></details>
   </section>
 
   <section class="ch-card" id="elective">

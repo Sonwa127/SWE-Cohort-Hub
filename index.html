@@ -9,7 +9,7 @@ html,body{margin:0}body{background:var(--color-bg);color:var(--color-fg);padding
 #elective{border-top-color:var(--c-green)}#elective h2{color:var(--c-green)}.ch-steps{margin:0;padding-left:1.4rem;display:grid;gap:.6rem}.ch-steps li::marker{color:var(--c-green);font-weight:700}.ch-steps a{color:var(--c-blue)}
 .ch-week{min-width:0!important;flex:1 1 3.2rem!important}.ch-week-tag{font-size:.68rem!important;line-height:1.15;white-space:nowrap;overflow:visible;text-align:center}.ch-week>*{min-width:0}
 @media (max-width:640px){.ch-classes td:last-child{display:flex;flex-wrap:wrap;gap:.5rem}.ch-classes td:last-child .ch-act{margin-right:0}.ch-exams td:last-child{white-space:nowrap}}
-#gst111{border-top-color:var(--c-violet)}#gst111 h2{color:var(--c-violet)}
+.gq-card{border-top-color:var(--c-violet)}.gq-card h2{color:var(--c-violet)}
 .gq-bar{display:flex;flex-wrap:wrap;gap:.5rem}.gq-bar .ch-act{margin:0;font:inherit;cursor:pointer;background:transparent}.gq-bar .ch-act.is-main{background:var(--c-green)}
 .gq-topics{display:grid;gap:.6rem}
 .gq-topic{border:1px solid var(--color-border-line);border-radius:12px;background:var(--color-panel);overflow:hidden}
@@ -28,12 +28,12 @@ html,body{margin:0}body{background:var(--color-bg);color:var(--color-fg);padding
 .gq-opt{display:flex;gap:.6rem;align-items:baseline;padding:.45rem .65rem;border:1px solid var(--color-border-line);border-radius:8px;min-width:0}
 .gq-opt b{flex:none;width:1.2rem;color:var(--color-fg-muted)}
 .gq-opt span{min-width:0;overflow-wrap:anywhere}
-#gst111:not(.is-hidden) .gq-opt.is-ans{background:var(--c-green-bg);border-color:var(--c-green);color:var(--c-green);font-weight:600}
-#gst111:not(.is-hidden) .gq-opt.is-ans b{color:var(--c-green)}
-#gst111:not(.is-hidden) .gq-opt.is-ans::after{content:"\2713";margin-left:auto;padding-left:.5rem}
+.gq-card:not(.is-hidden) .gq-opt.is-ans{background:var(--c-green-bg);border-color:var(--c-green);color:var(--c-green);font-weight:600}
+.gq-card:not(.is-hidden) .gq-opt.is-ans b{color:var(--c-green)}
+.gq-card:not(.is-hidden) .gq-opt.is-ans::after{content:"\2713";margin-left:auto;padding-left:.5rem}
 .gq-extra{display:flex;flex-wrap:wrap;gap:.4rem;align-items:center;font-size:.82rem;color:var(--color-fg-muted)}
 .gq-check{background:var(--c-amber-bg);color:var(--c-amber);border:1px solid var(--c-amber);border-radius:999px;padding:0 .5rem;font-weight:600;font-size:.72rem}
-#gst111.is-hidden .gq-extra{display:none}
+.gq-card.is-hidden .gq-extra{display:none}
 .gq-all>summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:.75rem}
 .gq-all>summary::-webkit-details-marker{display:none}
 .gq-all-title{display:grid;gap:.2rem;min-width:0}.gq-all-title h2{margin:0}
@@ -42,6 +42,12 @@ html,body{margin:0}body{background:var(--color-bg);color:var(--color-fg);padding
 .gq-all-icon::before{content:"+"}.gq-all[open]>summary .gq-all-icon::before{content:"\2212"}
 .gq-all[open] .gq-all-sub{display:none}
 .gq-all-body{display:grid;gap:var(--cds-gap-md);margin-top:var(--cds-gap-md)}
+.gq-free{padding:.55rem .7rem;border-radius:8px;background:var(--c-green-bg);border:1px solid var(--c-green);color:var(--c-green);font-weight:600;line-height:1.4;overflow-wrap:anywhere}
+.gq-card.is-hidden .gq-free{display:none}
+.gq-num{width:auto!important;min-width:1.7rem;padding:0 .4rem;border-radius:999px!important}
+.gq-card .gq-note{color:var(--color-fg-muted)}
+#cos101{border-top-color:var(--c-blue)}#cos101 h2{color:var(--c-blue)}
+#cos101 .gq-topic summary{background:var(--c-blue-bg);color:var(--c-blue)}#cos101 .gq-count{background:var(--c-blue)}#cos101 .gq-num{background:var(--c-blue-bg);color:var(--c-blue)}#cos101 .gq-all-icon{background:var(--c-blue)}
 </style></head><body>
 <style>
   .ch { max-width: 72rem; margin-inline: auto; display: grid; gap: var(--cds-gap-lg); font-family: var(--font-anthropic-sans); color: var(--color-fg); }
@@ -194,10 +200,299 @@ html,body{margin:0}body{background:var(--color-bg);color:var(--color-fg);padding
     </div>
   </section>
 
-  <section class="ch-card" id="gst111">
+  <section class="ch-card gq-card" id="cos101">
+    <details class="gq-all"><summary class="gq-all-sum"><span class="gq-all-title"><h2>COS 101 areas of concentration</h2><span class="gq-all-sub">32 practice questions with answers. Tap to open</span></span><span class="gq-all-icon" aria-hidden="true"></span></summary><div class="gq-all-body">
+    <p class="ch-note">Introduction to Computing Sciences. 32 practice questions and 2 discussion exercises across 6 topics, with answers worked out from the lecture slides (not an official answer key). Answers tagged <strong>check</strong> are less certain, so confirm them with your lecturer.</p>
+    <div class="gq-bar"><button type="button" class="ch-act gq-toggle" aria-pressed="false">Hide answers to practise</button><a class="ch-act is-main" href="COS-101-Questions-and-Answers.pdf" target="_blank" rel="noopener noreferrer">Download the PDF</a></div>
+    <div class="gq-topics">
+      <details class="gq-topic"><summary><span class="gq-name">Week 1: Introduction to Computing</span><span class="gq-count">6</span></summary><div class="gq-list">
+        <article class="gq"><div class="gq-head"><span class="gq-num">1</span><p class="gq-q">Which ancient mechanical device was primarily used as a counting tool, with the actual computation done by the user?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>Abacus</span></li>
+          <li class="gq-opt"><b>B</b><span>Jacquard&#x27;s Mechanical Loom</span></li>
+          <li class="gq-opt"><b>C</b><span>Baggage Counting Machine</span></li>
+          <li class="gq-opt"><b>D</b><span>Hollerith&#x27;s Punch Cards</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">2</span><p class="gq-q">What is the primary purpose of abstraction in computer science?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>Simplifying complex systems</span></li>
+          <li class="gq-opt"><b>B</b><span>Optimizing code execution</span></li>
+          <li class="gq-opt"><b>C</b><span>Enhancing user interface</span></li>
+          <li class="gq-opt"><b>D</b><span>Minimizing hardware requirements</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">3</span><p class="gq-q">What role do registers play in a CPU?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>Temporary storage for data, directly accessed by the ALU</span></li>
+          <li class="gq-opt"><b>B</b><span>Control the movement of data, not directly accessed by the ALU</span></li>
+          <li class="gq-opt"><b>C</b><span>Store program instructions</span></li>
+          <li class="gq-opt"><b>D</b><span>Contain machine language instructions</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">4</span><p class="gq-q">What happens to data stored on RAM when a computer is shut down?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>It is deleted</span></li>
+          <li class="gq-opt"><b>B</b><span>It remains intact</span></li>
+          <li class="gq-opt is-ans"><b>C</b><span>It is lost/erased</span></li>
+          <li class="gq-opt"><b>D</b><span>It is transferred to the hard disk</span></li>
+        </ul>
+        <div class="gq-extra"><span class="gq-check">check</span><span class="gq-note">A is close, but RAM data is lost rather than deleted.</span></div>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">5</span><p class="gq-q">What does the term &quot;stored program concept&quot; refer to in computer architecture?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>The use of registers to store program instructions</span></li>
+          <li class="gq-opt is-ans"><b>B</b><span>Storing program instructions and data in the same memory</span></li>
+          <li class="gq-opt"><b>C</b><span>The control unit&#x27;s management of program execution</span></li>
+          <li class="gq-opt"><b>D</b><span>The invention of the computer by John von Neumann</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">6</span><p class="gq-q">What is the primary advantage of cache memory over main memory in a CPU?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>More cost-effective to manufacture</span></li>
+          <li class="gq-opt is-ans"><b>B</b><span>Made from faster static RAM</span></li>
+          <li class="gq-opt"><b>C</b><span>Larger storage capacity</span></li>
+          <li class="gq-opt"><b>D</b><span>Easily upgradeable</span></li>
+        </ul>
+      </article>
+      </div></details>
+      <details class="gq-topic"><summary><span class="gq-name">Week 2: Computer Hardware</span><span class="gq-count">6</span></summary><div class="gq-list">
+        <article class="gq"><div class="gq-head"><span class="gq-num">7</span><p class="gq-q">What is the unit used to measure a computer processor&#x27;s speed?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>Hertz</span></li>
+          <li class="gq-opt"><b>B</b><span>Bytes</span></li>
+          <li class="gq-opt"><b>C</b><span>Pixels</span></li>
+          <li class="gq-opt"><b>D</b><span>Flops</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">8</span><p class="gq-q">What is the main distinguishing factor between system software and application software?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>System software is close to the hardware, application software is close to the software</span></li>
+          <li class="gq-opt"><b>B</b><span>System software performs specific tasks, application software manages system resources</span></li>
+          <li class="gq-opt"><b>C</b><span>System software costs more</span></li>
+          <li class="gq-opt is-ans"><b>D</b><span>System software runs on the hardware, application software runs on the operating system</span></li>
+        </ul>
+        <div class="gq-extra"><span class="gq-check">check</span></div>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">9</span><p class="gq-q">For a student who needs a computer mostly for writing papers, browsing the web and email, which would likely be the BEST choice?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>Laptop</span></li>
+          <li class="gq-opt"><b>B</b><span>Gaming desktop PC</span></li>
+          <li class="gq-opt"><b>C</b><span>Tablet</span></li>
+          <li class="gq-opt"><b>D</b><span>Smartphone</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">10</span><p class="gq-q">Which computer component determines how many applications can run simultaneously?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>RAM</span></li>
+          <li class="gq-opt"><b>B</b><span>CPU</span></li>
+          <li class="gq-opt"><b>C</b><span>GPU</span></li>
+          <li class="gq-opt"><b>D</b><span>Hard disk space</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">11</span><p class="gq-q">Which is an advantage of a desktop computer compared to a laptop?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>Upgradeable components</span></li>
+          <li class="gq-opt"><b>B</b><span>Larger screen size</span></li>
+          <li class="gq-opt"><b>C</b><span>Longer battery life</span></li>
+          <li class="gq-opt"><b>D</b><span>Increased portability</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">12</span><p class="gq-q">How does pipelining improve the overall speed of instruction execution in a CPU?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>Executing instructions in a random order</span></li>
+          <li class="gq-opt"><b>B</b><span>Increasing the number of CPUs</span></li>
+          <li class="gq-opt is-ans"><b>C</b><span>Breaking up instructions into smaller stages and overlapping their execution</span></li>
+          <li class="gq-opt"><b>D</b><span>Reducing the number of instructions processed simultaneously</span></li>
+        </ul>
+        <div class="gq-extra"><span class="gq-note">Confirmed on the slide.</span></div>
+      </article>
+      </div></details>
+      <details class="gq-topic"><summary><span class="gq-name">Week 5: Algorithms and Programming Basics</span><span class="gq-count">4</span></summary><div class="gq-list">
+        <article class="gq"><div class="gq-head"><span class="gq-num">13</span><p class="gq-q">Which of the following is NOT a characteristic of an algorithm?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>Has a finite number of steps</span></li>
+          <li class="gq-opt"><b>B</b><span>Has defined inputs and outputs</span></li>
+          <li class="gq-opt is-ans"><b>C</b><span>Does not involve loops or repetitions</span></li>
+          <li class="gq-opt"><b>D</b><span>Contains a sequence of steps</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">14</span><p class="gq-q">What type of code do interpreters directly execute?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>Assembly code</span></li>
+          <li class="gq-opt"><b>B</b><span>Object code</span></li>
+          <li class="gq-opt is-ans"><b>C</b><span>Source code</span></li>
+          <li class="gq-opt"><b>D</b><span>Machine code</span></li>
+        </ul>
+        <div class="gq-extra"><span class="gq-check">check</span><span class="gq-note">Students in the chat were split between C and D.</span></div>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">15</span><p class="gq-q">What does a flowchart use to represent the start and end of an algorithm?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>Ovals</span></li>
+          <li class="gq-opt"><b>B</b><span>Diamonds</span></li>
+          <li class="gq-opt"><b>C</b><span>Rectangles</span></li>
+          <li class="gq-opt"><b>D</b><span>Parallelograms</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">16</span><p class="gq-q">Why is C code faster than Python code?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>C has better memory management</span></li>
+          <li class="gq-opt is-ans"><b>B</b><span>C is compiled while Python is interpreted</span></li>
+          <li class="gq-opt"><b>C</b><span>C uses variables more efficiently</span></li>
+          <li class="gq-opt"><b>D</b><span>C has more data types</span></li>
+        </ul>
+      </article>
+      </div></details>
+      <details class="gq-topic"><summary><span class="gq-name">Week 6: Programming Fundamentals I</span><span class="gq-count">5</span></summary><div class="gq-list">
+        <article class="gq"><div class="gq-head"><span class="gq-num">17</span><p class="gq-q">Which of these is NOT one of the main steps in the software development process?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>Deployment</span></li>
+          <li class="gq-opt"><b>B</b><span>Testing</span></li>
+          <li class="gq-opt"><b>C</b><span>Specification</span></li>
+          <li class="gq-opt"><b>D</b><span>Implementation</span></li>
+        </ul>
+        <div class="gq-extra"><span class="gq-check">check</span><span class="gq-note">Not clear from the slides. All four are normally stages, so ask your lecturer which one he wants.</span></div>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">18</span><p class="gq-q">The profession that involves designing and creating software applications for mobile devices is typically known as:</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>Mobile App Developer</span></li>
+          <li class="gq-opt"><b>B</b><span>Web Developer</span></li>
+          <li class="gq-opt"><b>C</b><span>Data Scientist</span></li>
+          <li class="gq-opt"><b>D</b><span>AI Engineer</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">19</span><p class="gq-q">Which concept in Python allows code to be reused?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>Functions</span></li>
+          <li class="gq-opt"><b>B</b><span>Libraries</span></li>
+          <li class="gq-opt"><b>C</b><span>Packages</span></li>
+          <li class="gq-opt"><b>D</b><span>Pseudocodes</span></li>
+        </ul>
+        <div class="gq-extra"><span class="gq-note">Confirmed on the slide.</span></div>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">20</span><p class="gq-q">Which of the following is NOT a pseudocode keyword?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>IF</span></li>
+          <li class="gq-opt"><b>B</b><span>ELSE IF</span></li>
+          <li class="gq-opt"><b>C</b><span>ENDIF</span></li>
+          <li class="gq-opt is-ans"><b>D</b><span>RUN</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">21</span><p class="gq-q">Which of the following is a valid pseudocode statement?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>All the options</span></li>
+          <li class="gq-opt"><b>B</b><span>ELSE print(&quot;You are a child.&quot;)</span></li>
+          <li class="gq-opt"><b>C</b><span>ELIF age &gt; 13 THEN print(&quot;You are a teenager.&quot;)</span></li>
+          <li class="gq-opt is-ans"><b>D</b><span>IF age &gt; 18 THEN print(&quot;You are an adult.&quot;)</span></li>
+        </ul>
+      </article>
+      </div></details>
+      <details class="gq-topic"><summary><span class="gq-name">Week 7: Programming Fundamentals II</span><span class="gq-count">6</span></summary><div class="gq-list">
+        <article class="gq"><div class="gq-head"><span class="gq-num">22</span><p class="gq-q">What is the index of the last element in the list a = [57, 78, 34, 67, 78]?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>4</span></li>
+          <li class="gq-opt"><b>B</b><span>3</span></li>
+          <li class="gq-opt"><b>C</b><span>0</span></li>
+          <li class="gq-opt"><b>D</b><span>1</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">23</span><p class="gq-q">What is the output of this code? fruits = [&quot;apple&quot;, &quot;banana&quot;, &quot;cherry&quot;]; for i in range(len(fruits)): print(fruits[i])</p></div>
+        <div class="gq-free">apple, banana, cherry (each on its own line)</div>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">24</span><p class="gq-q">Which of the following is used to remove an item from a list in Python?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>None of the options</span></li>
+          <li class="gq-opt"><b>B</b><span>list.delete(item) and list.pop(index)</span></li>
+          <li class="gq-opt"><b>C</b><span>list.remove(item) and list.delete(item)</span></li>
+          <li class="gq-opt is-ans"><b>D</b><span>list.remove(item) and list.pop(index)</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">25</span><p class="gq-q">What is the output? x = 3; if x &gt; 5: print(&quot;x is greater than 5&quot;) elif x &lt; 5: print(&quot;x is less than 5&quot;) else: print(&quot;x is equal to 5&quot;)</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>x is less than 5</span></li>
+          <li class="gq-opt"><b>B</b><span>x is greater than 5</span></li>
+          <li class="gq-opt"><b>C</b><span>x is equal to 5</span></li>
+          <li class="gq-opt"><b>D</b><span>No output</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">26</span><p class="gq-q">What is the output? count = 0; while count &lt; 5: print(count); count += 1</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt"><b>A</b><span>012345</span></li>
+          <li class="gq-opt"><b>B</b><span>12345</span></li>
+          <li class="gq-opt"><b>C</b><span>1234</span></li>
+          <li class="gq-opt is-ans"><b>D</b><span>01234</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">27</span><p class="gq-q">What is the output? numbers = [1, 2, 3, 4, 5]; for num in numbers: if num % 2 == 0: print(num)</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>2 4</span></li>
+          <li class="gq-opt"><b>B</b><span>1 2 3 4 5</span></li>
+          <li class="gq-opt"><b>C</b><span>1 3 5</span></li>
+          <li class="gq-opt"><b>D</b><span>No output</span></li>
+        </ul>
+        <div class="gq-extra"><span class="gq-note">Confirmed in the lecturer&#x27;s terminal run.</span></div>
+      </article>
+      </div></details>
+      <details class="gq-topic"><summary><span class="gq-name">Discussion exercises</span><span class="gq-count">2</span></summary><div class="gq-list">
+        <article class="gq"><div class="gq-head"><span class="gq-num">E1</span><p class="gq-q">Define List, Tuple, Set and Dictionary.</p></div>
+        <div class="gq-free">List: ordered, changeable, written with [ ]. Tuple: ordered, not changeable, written with ( ). Set: unordered, no duplicates, written with { }. Dictionary: key and value pairs, written with {key: value}.</div>
+        <div class="gq-extra"><span class="gq-note">Matches what students posted in the chat.</span></div>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">E2</span><p class="gq-q">Sort these into acceptable and unacceptable variable names: test(grade), covid-19-cases, grade_test, 2.term, covid_19_cases, term1, 2021sales_price, sale_price_2021, miva&amp;learners, miva_learners.</p></div>
+        <div class="gq-free">Acceptable: grade_test, covid_19_cases, term1, sale_price_2021, miva_learners. Unacceptable: test(grade), covid-19-cases, 2.term, 2021sales_price, miva&amp;learners.</div>
+      </article>
+      </div></details>
+      <details class="gq-topic"><summary><span class="gq-name">Week 10: Software Development Life Cycle</span><span class="gq-count">5</span></summary><div class="gq-list">
+        <article class="gq"><div class="gq-head"><span class="gq-num">28</span><p class="gq-q">Which of the following statements is true about agile methodologies?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>They promote flexibility and adaptability by allowing changes in requirements</span></li>
+          <li class="gq-opt"><b>B</b><span>They are rigid and do not allow changes</span></li>
+          <li class="gq-opt"><b>C</b><span>They follow a sequential and linear process</span></li>
+          <li class="gq-opt"><b>D</b><span>They prioritize extensive documentation upfront</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">29</span><p class="gq-q">What is the purpose of a class diagram in the design phase?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>To show the components that will make up the system</span></li>
+          <li class="gq-opt"><b>B</b><span>To show the interaction between system models</span></li>
+          <li class="gq-opt"><b>C</b><span>To identify the system boundaries</span></li>
+          <li class="gq-opt"><b>D</b><span>To create the database structure</span></li>
+        </ul>
+        <div class="gq-extra"><span class="gq-note">Highlighted on the slide.</span></div>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">30</span><p class="gq-q">When does the Deployment phase occur in the SDLC?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>After successful testing</span></li>
+          <li class="gq-opt"><b>B</b><span>Before the Design phase</span></li>
+          <li class="gq-opt"><b>C</b><span>During the Implementation phase</span></li>
+          <li class="gq-opt"><b>D</b><span>At the beginning of the SDLC</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">31</span><p class="gq-q">What is the purpose of a sequence diagram in the design phase?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>To illustrate the interaction between system models</span></li>
+          <li class="gq-opt"><b>B</b><span>To create the database structure</span></li>
+          <li class="gq-opt"><b>C</b><span>To identify the system boundaries</span></li>
+          <li class="gq-opt"><b>D</b><span>To show the components that will make up the system</span></li>
+        </ul>
+      </article>
+        <article class="gq"><div class="gq-head"><span class="gq-num">32</span><p class="gq-q">Which software development model is known for its sequential and linear approach?</p></div>
+        <ul class="gq-opts">
+          <li class="gq-opt is-ans"><b>A</b><span>Waterfall model</span></li>
+          <li class="gq-opt"><b>B</b><span>Agile model</span></li>
+          <li class="gq-opt"><b>C</b><span>Spiral model</span></li>
+          <li class="gq-opt"><b>D</b><span>RAD model</span></li>
+        </ul>
+      </article>
+      </div></details>
+    </div>
+    </div></details>
+  </section>
+
+  <section class="ch-card gq-card" id="gst111">
     <details class="gq-all"><summary class="gq-all-sum"><span class="gq-all-title"><h2>GST 111 areas of concentration</h2><span class="gq-all-sub">38 practice questions with answers. Tap to open</span></span><span class="gq-all-icon" aria-hidden="true"></span></summary><div class="gq-all-body">
     <p class="ch-note">Communication in English. 38 practice questions across 10 topics, with answers worked out from the lecture slides (not an official answer key). Answers tagged <strong>check</strong> are less certain, so confirm them in your notes.</p>
-    <div class="gq-bar"><button type="button" class="ch-act" id="gq-toggle" aria-pressed="false">Hide answers to practise</button><a class="ch-act is-main" href="GST-111-Questions-and-Answers.pdf" target="_blank" rel="noopener noreferrer">Download the PDF</a></div>
+    <div class="gq-bar"><button type="button" class="ch-act gq-toggle" aria-pressed="false">Hide answers to practise</button><a class="ch-act is-main" href="GST-111-Questions-and-Answers.pdf" target="_blank" rel="noopener noreferrer">Download the PDF</a></div>
     <div class="gq-topics">
       <details class="gq-topic"><summary><span class="gq-name">Communication</span><span class="gq-count">10</span></summary><div class="gq-list">
         <article class="gq"><div class="gq-head"><span class="gq-num">1</span><p class="gq-q">We know the feelings and emotions of one another through ___.</p></div><ul class="gq-opts">
@@ -762,6 +1057,6 @@ const d3={timeFormat:(f)=>{const D=["Sun","Mon","Tue","Wed","Thu","Fri","Sat"],M
 })();
 </script>
 <script>
-(function(){var b=document.getElementById('gq-toggle'),s=document.getElementById('gst111');if(!b||!s)return;b.addEventListener('click',function(){var hid=s.classList.toggle('is-hidden');b.setAttribute('aria-pressed',hid?'true':'false');b.textContent=hid?'Show answers':'Hide answers to practise';});})();
+(function(){document.querySelectorAll('.gq-card').forEach(function(s){var b=s.querySelector('.gq-toggle');if(!b)return;b.addEventListener('click',function(){var hid=s.classList.toggle('is-hidden');b.setAttribute('aria-pressed',hid?'true':'false');b.textContent=hid?'Show answers':'Hide answers to practise';});});})();
 </script>
 </body></html>
